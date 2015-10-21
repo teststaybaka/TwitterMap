@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="/static/map.css" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://maps.googleapis.com/maps/api/js?libraries=visualization"></script>
+<script src="/static/markerclusterer_compiled.js"></script>
+<script src="/static/oms.min.js"></script>
+<script src="/static/map.js"></script>
+</head>
+
+<body>
+<div id="googleMap"></div>
+<div class="side-bar">
+    <label class="trigger-marker">
+        <span>Show markers: </span>
+        <input type="checkbox" checked>
+    </label>
+    <div class="keywords-block">
+        <div class="keywords-label">Keywords:</div>
+        <select class="keywords-select">
+            <option>xcb</option>
+        </select>
+    </div>
+</div>
+</body>
+</html>
