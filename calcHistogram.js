@@ -11,11 +11,11 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err) {
   if (err) {
-    console.log('error connecting:' + err.stack);
+    console.log('worker error connecting:' + err.stack);
     return
   }
 
-  console.log('connected as id ' + connection.threadId);
+  console.log('worder connected as id ' + connection.threadId);
 });
 
 function calcHistogram() {
@@ -50,7 +50,7 @@ function calcHistogram() {
             }
             console.log(JSON.stringify(tops));
         }
-    }
+    });
     setTimeout(calcHistogram, 15*60*1000);
 }
 setTimeout(calcHistogram, 2000);
