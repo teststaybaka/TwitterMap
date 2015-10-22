@@ -3,7 +3,7 @@ var fs = require('fs');
 var WebSocketServer = require('ws').Server;
 var background = require('./background.js');
 var connection = background.connection;
-var getWords = require('./getwords.js');
+var histogram = background.histogram;
 
 var static_path = /\/static\/(.*)/;
 var mimeTypes = {
@@ -42,6 +42,10 @@ var server = http.createServer(function (request, response) {
       }
       response.end();
     });
+  } else if (request.url === '/histogram') {
+    response.writeHead(200, {'Content-Type': 'application/json'});
+    response.write(JSON.stringify(histogram));
+    response.end();
   } else if (request.url === '/sample') {
     response.writeHead(200, {'Content-Type': 'text/html'});
     connection.query('select * from streamdata limit 100', function (err, result) {
@@ -49,37 +53,6 @@ var server = http.createServer(function (request, response) {
         response.write('select:'+err);
       } else {
         response.write('<html><head><meta charset="UTF-8"></head><body><p>select:'+JSON.stringify(result)+'</p></body></html>');
-      }
-      response.end();
-    });
-  } else if (request.url === '/histogram') {
-    response.writeHead(200, {'Content-Type': 'text/plain'});
-    connection.query('select text from streamdata', function (err, result) {
-      if (err) {
-        response.write('histogram error');
-      } else {
-        var histogram = {};
-        for (var i = 0; i < result.length; i++) {
-          var text = result[i].text;
-          var words = getWords(text);
-          for (var j = 0; j < words.length; j++) {
-            var word = words[j];
-            if (word in histogram) {
-              histogram[word] += 1;
-            } else {
-              histogram[word] = 1;
-            }
-          }
-        }
-
-        var tuples = [];
-        for (var key in histogram) {
-          tuples.push([key, histogram[key]])
-        };
-        tuples.sort(function (x, y) {
-          return y[1] - x[1];
-        });
-        response.write('histogram:'+JSON.stringify(tuples)+'\n');
       }
       response.end();
     });
