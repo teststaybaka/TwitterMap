@@ -105,6 +105,9 @@ fs.readFile('./wordlist.txt', function (err, data) {
     } else {
         data = data.toString();
         var lines = data.split('\n');
+        for (var i = 0; i < lines[0].length; i++) {
+            console.log(lines[0].charCodeAt(i));
+        }
         for (var i = 0; i < lines.length; i++) {
             if (start && word_reg.test(lines[i])) {
                 word_set[lines[i].toLowerCase()] = 1;
