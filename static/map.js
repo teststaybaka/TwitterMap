@@ -56,14 +56,17 @@ google.maps.event.addDomListener(window, 'load', function() {
                         }
                     } else {
                         var regex = new RegExp('(^|[^a-zA-Z])'+keywords+'($|[^a-zA-Z])');
+                        var count = 0;
                         for (var i = 0; i < markers.length; i++) {
                             var marker = markers[i];
                             if (regex.test(marker.desc.toLowerCase())) {
                                 markerCluster.addMarker(marker, true);
                                 oms.addMarker(marker);
+                                count += 1;
                             }
                         }
                         markerCluster.redraw();
+                        console.log(count);
                     }
                 }
             });
