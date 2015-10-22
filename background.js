@@ -32,11 +32,11 @@ connection.connect(function(err) {
 // location varchar(255),\
 // )engine=InnoDB DEFAULT CHARSET=utf8'
 
-alter_table= 'ALTER TABLE streamdata ADD image_url varchar(255) AFTER screen_name';
+// alter_table= 'ALTER TABLE streamdata ADD image_url varchar(255) AFTER screen_name';
 
-connection.query(alter_table, function(err, result) {
-  console.log('alter table: '+err+' '+result);
-})
+// connection.query(alter_table, function(err, result) {
+//   console.log('alter table: '+err+' '+result);
+// })
 
 //======================================================================================================================================================================================================================
 // background process: loading twitter stream data into database
@@ -51,8 +51,8 @@ client.stream('statuses/sample', function(stream) {
   stream.on('data', function(tweet) {
     // console.log(tweet);
     if (!tweet.delete && tweet.coordinates) {
-      store_query = 'replace into streamdata (id, text, longitude, latitude, lang, timestamp_ms, created_at, user_id, screen_name, location) values '+
-                  "("+mysql.escape(tweet.id)+", "+mysql.escape(tweet.text)+", "+mysql.escape(tweet.coordinates.coordinates[0])+", "+mysql.escape(tweet.coordinates.coordinates[1])+", "+mysql.escape(tweet.lang)+", "+mysql.escape(tweet.timestamp_ms)+", "+mysql.escape(tweet.created_at)+", "+mysql.escape(tweet.user.id)+", "+mysql.escape(tweet.user.screen_name)+", "+mysql.escape(tweet.user.location)+")"
+      store_query = 'replace into streamdata (id, text, longitude, latitude, lang, timestamp_ms, created_at, user_id, screen_name, image_url, location) values '+
+                  "("+mysql.escape(tweet.id)+", "+mysql.escape(tweet.text)+", "+mysql.escape(tweet.coordinates.coordinates[0])+", "+mysql.escape(tweet.coordinates.coordinates[1])+", "+mysql.escape(tweet.lang)+", "+mysql.escape(tweet.timestamp_ms)+", "+mysql.escape(tweet.created_at)+", "+mysql.escape(tweet.user.id)+", "+mysql.escape(tweet.user.screen_name)+", "+mysql.escape(tweet.user.profile_image_url)+", "+mysql.escape(tweet.user.location)+")"
       connection.query(store_query, function(err, result) {
         if (err) {
           console.log('replace query: '+err+' <--> '+JSON.stringify(result)+' <--> '+store_query)
