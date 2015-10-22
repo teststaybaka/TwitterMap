@@ -24,7 +24,7 @@ function calcHistogram() {
                     }
                 }
                 if ('istanbul' in words) {
-                    console.log('worker istanbul:'+histogram['istanbul']);
+                    console.log('worker istanbul:'+histogram['istanbul']+' '+text);
                 }
             }
 
