@@ -42,6 +42,7 @@ connection.connect(function(err) {
 var histogram = {};
 var tuples = [];
 function calcHistogram() {
+    console.log('start calcHistogram');
     connection.query('select text from streamdata', function (err, result) {
         if (!err) {
             histogram = {};
