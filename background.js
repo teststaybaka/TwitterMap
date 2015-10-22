@@ -53,7 +53,7 @@ worker.stdout.on('data', function (data) {
             histogram.push(tops[i]);
         }
     } catch(e) {
-        console.log(data);
+        console.log('worker: '+data);
     }
 });
 worker.stderr.on('data', function (data) {
