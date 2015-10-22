@@ -106,7 +106,7 @@ fs.readFile('./wordlist.txt', function (err, data) {
         data = data.toString();
         var lines = data.split('\n');
         for (var i = 0; i < lines.length; i++) {
-            var line = lines[i].toLowerCase().trim();
+            var line = lines[i].toLowerCase();
             if (start && word_reg.test(line)) {
                 word_set[line] = 1;
             } else if (line === '---') {
@@ -121,7 +121,7 @@ fs.readFile('./wordlist.txt', function (err, data) {
                 data = data.toString();
                 var lines = data.split('\n');
                 for (var i = 0; i < lines.length; i++) {
-                    var line = lines[i].toLowerCase().trim();
+                    var line = lines[i].toLowerCase();
                     delete word_set[line];
                 }
                 console.log('after:')
