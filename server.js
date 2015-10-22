@@ -57,18 +57,22 @@ var server = http.createServer(function (request, response) {
     var word_reg = /([a-zA-Z]+)/g;
     var histogram = {};
     connection.query('select text from streamdata', function (err, result) {
-      for (var i = 0; i < result.length; i++) {
-        var text = result[i].text;
-        var words = text.match(word_reg);
-        for (var j = 0; j < words.length; j++) {
-          if (words[j] in histogram) {
-            histogram[words[j]] += 1;
-          } else {
-            histogram[words[j]] = 1;
+      if (err) {
+        response.write('histogram error');
+      } else {
+        for (var i = 0; i < result.length; i++) {
+          var text = result[i].text;
+          var words = text.match(word_reg);
+          for (var j = 0; j < words.length; j++) {
+            if (words[j] in histogram) {
+              histogram[words[j]] += 1;
+            } else {
+              histogram[words[j]] = 1;
+            }
           }
         }
+        response.write('<html><head><meta charset="UTF-8"></head><body><p>count:'+JSON.stringify(histogram)+'</p></body></html>');
       }
-      response.write('<html><head><meta charset="UTF-8"></head><body><p>count:'+JSON.stringify(histogram)+'</p></body></html>');
       response.end();
     });
   } else if (request.url === '/count') {
