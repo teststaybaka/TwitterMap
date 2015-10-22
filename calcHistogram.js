@@ -23,9 +23,9 @@ function calcHistogram() {
                         histogram[word] = 1;
                     }
                 }
-                if ('istanbul' in words) {
-                    console.log('worker istanbul:'+histogram['istanbul']+' '+text);
-                }
+                // if ('istanbul' in words) {
+                //     console.log('worker istanbul:'+histogram['istanbul']+' '+text);
+                // }
             }
 
             var tuples = [];
