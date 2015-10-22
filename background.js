@@ -70,7 +70,7 @@ function calcHistogram() {
         setTimeout(calcHistogram, 15*60*1000);
     });
 }
-setTimeout(calcHistogram, 2000);
+// setTimeout(calcHistogram, 2000);
 
 //======================================================================================================================================================================================================================
 // background process: loading twitter stream data into database
