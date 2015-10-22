@@ -63,6 +63,7 @@ var server = http.createServer(function (request, response) {
           var text = result[i].text;
           var words = getWords(text);
           for (var j = 0; j < words.length; j++) {
+            var word = words[j];
             if (word in histogram) {
               histogram[word] += 1;
             } else {
