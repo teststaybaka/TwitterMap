@@ -1,6 +1,7 @@
 var Twitter = require('twitter');
 var mysql = require('mysql');
 var spawn = require('child_process').spawn;
+var events = require('events');
 
 var connection = mysql.createConnection({
   host     : 'aa121unjjx7r1pz.cwczbkmzwby7.us-west-2.rds.amazonaws.com',
@@ -66,6 +67,13 @@ var client = new Twitter({
     access_token_secret: process.env.access_token_secret,
 });
 
+var StreamAPI = function() {}
+StreamAPI.prototype = new events.EventEmitter;
+StreamAPI.prototype.set_new_tweet = function(tweet) {
+    this.emit('data', tweet);
+}
+var filteredStream = new StreamAPI();
+
 client.stream('statuses/sample', {stall_warnings: true}, function(stream) {
     stream.on('data', function(tweet) {
         // console.log(tweet);
@@ -77,7 +85,7 @@ client.stream('statuses/sample', {stall_warnings: true}, function(stream) {
                     console.log('replace query: '+err+' <--> '+JSON.stringify(result)+' <--> '+store_query)
                 }
             });
-            // new_tweets.push([tweet.id, tweet.text, tweet.coordinates.coordinates[0], tweet.coordinates.coordinates[1], tweet.lang, tweet.created_at, tweet.user.screen_name, tweet.user.profile_image_url]);
+            filteredStream.set_new_tweet([tweet.id, tweet.text, tweet.coordinates.coordinates[0], tweet.coordinates.coordinates[1], tweet.lang, tweet.created_at, tweet.user.screen_name, tweet.user.profile_image_url]);
         }
     });
  
@@ -90,4 +98,5 @@ client.stream('statuses/sample', {stall_warnings: true}, function(stream) {
 module.exports = {
     connection: connection,
     histogram: histogram,
+    twitterStream: filteredStream,
 }

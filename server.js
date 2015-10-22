@@ -4,6 +4,7 @@ var WebSocketServer = require('ws').Server;
 var background = require('./background.js');
 var connection = background.connection;
 var histogram = background.histogram;
+var twitterStream = background.twitterStream;
 
 var static_path = /\/static\/(.*)/;
 var mimeTypes = {
@@ -99,3 +100,9 @@ wss.on('connection', function (ws) {
 wss.on('error', function (evt) {
   console.log('WebSocket error: '+evt)
 })
+
+twitterStream.on('data', function(tweet) {
+  wss.clients.forEach(function (client) {
+    client.send(JSON.stringify(tweet));
+  });
+});
