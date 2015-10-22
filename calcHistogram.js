@@ -23,6 +23,7 @@ function calcHistogram() {
                         histogram[word] = 1;
                     }
                 }
+                console.log(histogram['istanbul']);
             }
 
             var tuples = [];
