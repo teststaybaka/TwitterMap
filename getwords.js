@@ -132,6 +132,7 @@ module.exports = function(line) {
     line = line.replace(/[^\u0000-\u007E]/g, function(c){
        return diacriticsMap[c] || c;
     });
+    console.log(line);
 
     var words = line.match(word_group);
     if (!words) {
