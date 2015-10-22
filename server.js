@@ -53,7 +53,7 @@ var server = http.createServer(function (request, response) {
       response.end();
     });
   } else if (request.url === '/histogram') {
-    response.writeHead(200, {'Content-Type': 'text/html'});
+    response.writeHead(200, {'Content-Type': 'text/plain'});
     connection.query('select text from streamdata', function (err, result) {
       if (err) {
         response.write('histogram error');
@@ -73,11 +73,15 @@ var server = http.createServer(function (request, response) {
         }
 
         var tuples = [];
-        for (var key in histogram) tuples.push([key, histogram[key]]);
+        for (var key in histogram) {
+          tuples.push([key, histogram[key]])
+        };
         tuples.sort(function (x, y) {
           return y[1] - x[1];
         });
-        response.write('<html><head><meta charset="UTF-8"></head><body><p>histogram:'+JSON.stringify(histogram)+'</p></body></html>');
+        console.log(tuples.length)
+        response.write('histogram:'+JSON.stringify(histogram)+'\n');
+        response.write('histogram:'+JSON.stringify(tuples)+'\n');
       }
       response.end();
     });
