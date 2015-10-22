@@ -38,18 +38,10 @@ var server = http.createServer(function (request, response) {
       if (err) {
         response.write(JSON.stringify({error: err}));
       } else {
-        var tops = [];
-        for (var i = 0; i < Math.min(10, histogram.length); i++) {
-          tops.push(histogram[i]);
-        }
-        response.write(JSON.stringify({tweets: result, histogram: tops}));
+        response.write(JSON.stringify({tweets: result, histogram: histogram}));
       }
       response.end();
     });
-  } else if (request.url === '/histogram') {
-    response.writeHead(200, {'Content-Type': 'application/json'});
-    response.write(JSON.stringify(histogram));
-    response.end();
   } else if (request.url === '/sample') {
     response.writeHead(200, {'Content-Type': 'text/html'});
     connection.query('select * from streamdata limit 100', function (err, result) {

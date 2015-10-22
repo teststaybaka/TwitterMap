@@ -1,6 +1,6 @@
 var Twitter = require('twitter');
 var mysql = require('mysql');
-var getWords = require('./getwords.js');
+var spawn = require('child_process').spawn;
 
 var connection = mysql.createConnection({
   host     : 'aa121unjjx7r1pz.cwczbkmzwby7.us-west-2.rds.amazonaws.com',
@@ -39,38 +39,17 @@ connection.connect(function(err) {
 //   console.log('alter table: '+err+' '+result);
 // })
 
-var histogram = {};
-var tuples = [];
-function calcHistogram() {
-    console.log('start calcHistogram');
-    connection.query('select text from streamdata', function (err, result) {
-        if (!err) {
-            histogram = {};
-            for (var i = 0; i < result.length; i++) {
-                var text = result[i].text;
-                var words = getWords(text);
-                for (var j = 0; j < words.length; j++) {
-                    var word = words[j];
-                    if (word in histogram) {
-                        histogram[word] += 1;
-                    } else {
-                        histogram[word] = 1;
-                    }
-                }
-            }
-
-            tuples.length = 0;
-            for (var key in histogram) {
-                tuples.push([key, histogram[key]])
-            };
-            tuples.sort(function (x, y) {
-                return y[1] - x[1];
-            });
-        }
-        setTimeout(calcHistogram, 15*60*1000);
-    });
-}
-// setTimeout(calcHistogram, 2000);
+//================================================================================================================================================================================
+// scheduled task
+var histogram = [];
+var worker = spawn('node', ['calcHistogram.js']);
+worker.stdout.on('data', function (data) {
+    var tops = JSON.parse(data);
+    histogram.length = 0;
+    for (var i = 0; i < tops.length; i++) {
+        histogram.push(tops[i]);
+    }
+});
 
 //======================================================================================================================================================================================================================
 // background process: loading twitter stream data into database
@@ -104,5 +83,5 @@ client.stream('statuses/sample', {stall_warnings: true}, function(stream) {
 
 module.exports = {
     connection: connection,
-    histogram: tuples,
+    histogram: histogram,
 }
