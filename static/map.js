@@ -52,12 +52,20 @@ google.maps.event.addDomListener(window, 'load', function() {
                 }
             });
 
-            var histogram = result.histogram;
-            for (var i = 0; i < histogram.length; i++) {
-                var key = histogram[i][0];
-                var value = histogram[i][1];
-                $('.keywords-select').append('<option>'+key+'</option>');
-                console.log(value);
+            if (result.histogram) {
+                var histogram = result.histogram;
+                var maximum = histogram[0][1];
+                for (var i = 0; i < histogram.length; i++) {
+                    var key = histogram[i][0];
+                    var value = histogram[i][1];
+                    $('.keywords-select').append('<option>'+key+'</option>');
+                    $('.histogram-block').append('<div class="histogram-line">\
+                                                    <div class="histogram-key">'+key+'</div>\
+                                                    <div class="histogram-value">\
+                                                        <div class="histogram-bar" style="width: '+value/maximum*100+'%;">'+value+'</div>\
+                                                    </div>\
+                                                </div>')
+                }
             }
 
             var ws = new WebSocket("ws://" + window.location.hostname);

@@ -94,3 +94,41 @@ input[type=checkbox] {
     background-image: url("/static/ajax-loader.gif");
     background-repeat: no-repeat;
 }
+
+.histogram-block {
+    margin-top: 15px;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.histogram-line {
+    margin: 5px 0;
+    height: 16px;
+}
+
+.histogram-key {
+    width: 20%;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    vertical-align: top;
+    height: 100%;
+}
+
+.histogram-value {
+    display: inline-block;
+    vertical-align: top;
+    width: 80%;
+    height: 100%;
+}
+
+.histogram-bar {
+    background-color: rgb(40,200,40);
+    height: 100%;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 14px;
+    color: white;
+}
