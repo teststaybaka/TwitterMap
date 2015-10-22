@@ -131,6 +131,7 @@ fs.readFile('./wordlist.txt', function (err, data) {
 
 var word_group = /([a-zA-Z]+)/g;
 module.exports = function(line) {
+    line = line.replace(/http.*?($|\s)/g, ' ');
     line = line.replace(/[^\u0000-\u007E]/g, function(c){
        return diacriticsMap[c] || c;
     });

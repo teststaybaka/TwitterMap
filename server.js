@@ -59,15 +59,11 @@ var server = http.createServer(function (request, response) {
         response.write('histogram error');
       } else {
         var histogram = {};
-        console.log(result.length);
         for (var i = 0; i < result.length; i++) {
           var text = result[i].text;
           var words = getWords(text);
-          // console.log(words);
           for (var j = 0; j < words.length; j++) {
             var word = words[j];
-            // console.log(text);
-            // console.log(words);
             if (word in histogram) {
               histogram[word] += 1;
             } else {
@@ -83,7 +79,6 @@ var server = http.createServer(function (request, response) {
         tuples.sort(function (x, y) {
           return y[1] - x[1];
         });
-        response.write('histogram:'+JSON.stringify(histogram)+'\n');
         response.write('histogram:'+JSON.stringify(tuples)+'\n');
       }
       response.end();
