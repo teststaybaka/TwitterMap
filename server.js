@@ -54,11 +54,11 @@ var server = http.createServer(function (request, response) {
     });
   } else if (request.url === '/histogram') {
     response.writeHead(200, {'Content-Type': 'text/html'});
-    var histogram = {};
     connection.query('select text from streamdata', function (err, result) {
       if (err) {
         response.write('histogram error');
       } else {
+        var histogram = {};
         for (var i = 0; i < result.length; i++) {
           var text = result[i].text;
           var words = getWords(text);
@@ -77,7 +77,7 @@ var server = http.createServer(function (request, response) {
         tuples.sort(function (x, y) {
           return y[1] - x[1];
         });
-        response.write('<html><head><meta charset="UTF-8"></head><body><p>count:'+JSON.stringify(tuples)+'</p></body></html>');
+        response.write('<html><head><meta charset="UTF-8"></head><body><p>histogram:'+JSON.stringify(histogram)+'</p></body></html>');
       }
       response.end();
     });
