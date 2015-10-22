@@ -104,11 +104,12 @@ fs.readFile('./wordlist.txt', function (err, data) {
         console.log('Load wordlist error:'+err);
     } else {
         data = data.toString();
-        var lines = data.split('\n').trim();
+        var lines = data.split('\n');
         for (var i = 0; i < lines.length; i++) {
-            if (start && word_reg.test(lines[i])) {
-                word_set[lines[i].toLowerCase()] = 1;
-            } else if (lines[i] === '---') {
+            var line = lines[i].toLowerCase().trim();
+            if (start && word_reg.test(line)) {
+                word_set[line] = 1;
+            } else if (line === '---') {
                 start = 1;
             }
         }
@@ -118,9 +119,10 @@ fs.readFile('./wordlist.txt', function (err, data) {
                 console.log('Load stopwords error:'+err);
             } else {
                 data = data.toString();
-                var lines = data.split('\n').trim();
+                var lines = data.split('\n');
                 for (var i = 0; i < lines.length; i++) {
-                    delete word_set[lines[i]];
+                    var line = lines[i].toLowerCase().trim();
+                    delete word_set[line];
                 }
                 console.log('after:')
                 console.log(word_set)
