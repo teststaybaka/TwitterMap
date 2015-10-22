@@ -66,7 +66,7 @@ body {
     margin-left: 5%;
     margin-top: 10px;
     font-size: 14px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     display: block;
     cursor: pointer;
 }
@@ -96,14 +96,13 @@ input[type=checkbox] {
 }
 
 .histogram-block {
-    margin-top: 15px;
+    margin-top: 30px;
     padding-left: 5%;
     padding-right: 5%;
 }
 
 .histogram-line {
-    margin: 5px 0;
-    height: 16px;
+    margin: 10px 0;
 }
 
 .histogram-key {
@@ -114,14 +113,14 @@ input[type=checkbox] {
     text-overflow: ellipsis;
     display: inline-block;
     vertical-align: top;
-    height: 100%;
+    line-height: 20px;
 }
 
 .histogram-value {
     display: inline-block;
     vertical-align: top;
-    width: 80%;
-    height: 100%;
+    width: 78%;
+    margin-left: 2%;
 }
 
 .histogram-bar {
@@ -131,4 +130,5 @@ input[type=checkbox] {
     white-space: nowrap;
     font-size: 14px;
     color: white;
+    line-height: 20px;
 }

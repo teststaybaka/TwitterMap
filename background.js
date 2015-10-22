@@ -81,7 +81,7 @@ var client = new Twitter({
     access_token_secret: process.env.access_token_secret,
 });
 
-client.stream('statuses/sample', function(stream) {
+client.stream('statuses/sample', {stall_warnings: true}, function(stream) {
     stream.on('data', function(tweet) {
         // console.log(tweet);
         if (!tweet.delete && tweet.coordinates) {

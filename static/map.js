@@ -60,7 +60,7 @@ google.maps.event.addDomListener(window, 'load', function() {
                     var value = histogram[i][1];
                     $('.keywords-select').append('<option>'+key+'</option>');
                     $('.histogram-block').append('<div class="histogram-line">\
-                                                    <div class="histogram-key">'+key+'</div>\
+                                                    <div class="histogram-key" title="'+key+'">'+key+'</div>\
                                                     <div class="histogram-value">\
                                                         <div class="histogram-bar" style="width: '+value/maximum*100+'%;">'+value+'</div>\
                                                     </div>\
