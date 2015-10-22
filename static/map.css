@@ -126,6 +126,9 @@ input[type=checkbox] {
 .histogram-bar {
     background-color: rgb(40,200,40);
     height: 100%;
+    width: 0%;
+    -webkit-transition: width .3s; /* For Safari 3.1 to 6.0 */
+    transition: width .3s;
     text-align: center;
     white-space: nowrap;
     font-size: 14px;
