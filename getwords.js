@@ -124,8 +124,6 @@ fs.readFile('./wordlist.txt', function (err, data) {
                     var line = lines[i].toLowerCase();
                     delete word_set[line];
                 }
-                console.log('after:')
-                console.log(word_set)
             }
         });
     }
