@@ -45,10 +45,14 @@ connection.connect(function(err) {
 var histogram = [];
 var worker = spawn('node', ['calcHistogram.js']);
 worker.stdout.on('data', function (data) {
-    var tops = JSON.parse(data);
-    histogram.length = 0;
-    for (var i = 0; i < tops.length; i++) {
-        histogram.push(tops[i]);
+    try {
+        var tops = JSON.parse(data);
+        histogram.length = 0;
+        for (var i = 0; i < tops.length; i++) {
+            histogram.push(tops[i]);
+        }
+    } catch(e) {
+        console.log(data);
     }
 });
 worker.stderr.on('data', function (data) {
