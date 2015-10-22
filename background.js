@@ -59,7 +59,7 @@ function calcHistogram() {
                 }
             }
 
-            tuples = [];
+            tuples.length = 0;
             for (var key in histogram) {
                 tuples.push([key, histogram[key]])
             };
