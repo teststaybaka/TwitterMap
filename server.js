@@ -59,18 +59,20 @@ var server = http.createServer(function (request, response) {
         response.write('histogram error');
       } else {
         var histogram = {};
-        console.log(histogram);
+        console.log(result.length);
         for (var i = 0; i < result.length; i++) {
           var text = result[i].text;
           var words = getWords(text);
           for (var j = 0; j < words.length; j++) {
             var word = words[j];
+            console.log(word);
+            console.log(histogram);
             if (word in histogram) {
               histogram[word] += 1;
             } else {
               histogram[word] = 1;
             }
-            console.log(histogram)
+            console.log(histogram);
           }
         }
 
