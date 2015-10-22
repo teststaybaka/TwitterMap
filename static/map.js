@@ -44,15 +44,14 @@ google.maps.event.addDomListener(window, 'load', function() {
             });
 
             $('.trigger-marker input').prop('checked', true);
-            $('.trigger-marker input').change(function() {
-                if ($(this).is(':checked')) {
+            $('.trigger-marker input, .keywords-select').change(function() {
+                if ($('.trigger-marker input').is(':checked')) {
                     filterMarkers();
                 } else {
                     markerCluster.clearMarkers();
                     oms.clearMarkers();
                 }
             });
-            $('.keywords-select').change(filterMarkers);
 
             function filterMarkers() {
                 var keywords = $('.keywords-select').val();
