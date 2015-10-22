@@ -69,6 +69,7 @@ var server = http.createServer(function (request, response) {
         }
       }
       response.write('<html><head><meta charset="UTF-8"></head><body><p>count:'+JSON.stringify(histogram)+'</p></body></html>');
+      response.end();
     });
   } else if (request.url === '/count') {
     response.writeHead(200, {'Content-Type': 'text/html'});
