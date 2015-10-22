@@ -62,9 +62,9 @@ google.maps.event.addDomListener(window, 'load', function() {
                     $('.histogram-block').append('<div class="histogram-line">\
                                                     <div class="histogram-key" title="'+key+'">'+key+'</div>\
                                                     <div class="histogram-value">\
-                                                        <div class="histogram-bar" style="width: '+value/maximum*100+'%;">'+value+'</div>\
+                                                        <div class="histogram-bar" data-width="'+value/maximum*100+'%">'+value+'</div>\
                                                     </div>\
-                                                </div>')
+                                                </div>');
                 }
             }
 
@@ -80,6 +80,9 @@ google.maps.event.addDomListener(window, 'load', function() {
             }
 
             $('.loading').addClass('hidden');
+            $('.histogram-bar').each(function() {
+                $(this).width($(this).attr('data-width'));
+            });
         },
     });
 });
