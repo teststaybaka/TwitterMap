@@ -93,10 +93,8 @@ wss.on('connection', function (ws) {
   //   console.log('received: %s', message);
   // });
 
-  ws.send('something');
-  console.log('WebSocket connection establish.');
+  console.log('WebSocket connection established.');
 });
-
 wss.on('error', function (evt) {
   console.log('WebSocket error: '+evt)
 })

@@ -140,11 +140,11 @@ module.exports = function(line) {
     if (!words) {
         return [];
     } else {
-        var res = [];
+        var res = {};
         for (var i = 0; i < words.length; i++) {
             var word = words[i].toLowerCase();
             if (word in word_set) {
-                res.push(word);
+                res[word] = 1;
             }
         }
         return res;

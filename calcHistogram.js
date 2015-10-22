@@ -16,8 +16,7 @@ function calcHistogram() {
             for (var i = 0; i < result.length; i++) {
                 var text = result[i].text;
                 var words = getWords(text);
-                for (var j = 0; j < words.length; j++) {
-                    var word = words[j];
+                for (var word in words) {
                     if (word in histogram) {
                         histogram[word] += 1;
                     } else {

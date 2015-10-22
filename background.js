@@ -85,7 +85,7 @@ client.stream('statuses/sample', {stall_warnings: true}, function(stream) {
                     console.log('replace query: '+err+' <--> '+JSON.stringify(result)+' <--> '+store_query)
                 }
             });
-            filteredStream.set_new_tweet([tweet.id, tweet.text, tweet.coordinates.coordinates[0], tweet.coordinates.coordinates[1], tweet.lang, tweet.created_at, tweet.user.screen_name, tweet.user.profile_image_url]);
+            filteredStream.set_new_tweet([tweet.text, tweet.coordinates.coordinates[0], tweet.coordinates.coordinates[1], tweet.lang, tweet.created_at, tweet.user.screen_name, tweet.user.profile_image_url]);
         }
     });
  
