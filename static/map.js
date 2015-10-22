@@ -52,6 +52,28 @@ google.maps.event.addDomListener(window, 'load', function() {
                 }
             });
 
+            $('.keywords-select').change(function() {
+                var keywords = $(this).val();
+                markerCluster.clearMarkers();
+                oms.clearMarkers();
+                if (keywords === 'All') {
+                    markerCluster.addMarkers(markers, false);
+                    for (var i = 0; i < markers.length; i++) {
+                        oms.addMarker(marker);
+                    }
+                } else {
+                    var regex = new RegExp('(^|[^a-zA-Z])'+keywords+'($|[^a-zA-Z])');
+                    for (var i = 0; i < markers.length; i++) {
+                        var marker = markers[i];
+                        if (regex.test(marker.desc)) {
+                            markerCluster.addMarker(marker, true);
+                            oms.addMarker(marker);
+                        }
+                    }
+                    markerCluster.redraw();
+                }
+            });
+
             if (result.histogram) {
                 var histogram = result.histogram;
                 var maximum = histogram[0][1];

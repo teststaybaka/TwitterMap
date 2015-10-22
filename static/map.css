@@ -127,8 +127,6 @@ input[type=checkbox] {
     background-color: rgb(40,200,40);
     height: 100%;
     width: 0%;
-    -webkit-transition: width 1s; /* For Safari 3.1 to 6.0 */
-    transition: width 1s;
     text-align: center;
     white-space: nowrap;
     font-size: 14px;
