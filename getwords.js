@@ -112,6 +112,8 @@ fs.readFile('./wordlist.txt', function (err, data) {
                 start = 1;
             }
         }
+        console.log('wordlist:')
+        console.log(word_set)
 
         fs.readFile('./stopwords.txt', function (err, data) {
             if (err) {
@@ -122,6 +124,7 @@ fs.readFile('./wordlist.txt', function (err, data) {
                 for (var i = 0; i < lines.length; i++) {
                     delete word_set[lines[i]];
                 }
+                console.log('after:')
                 console.log(word_set)
             }
         });
