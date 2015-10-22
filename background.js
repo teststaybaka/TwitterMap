@@ -50,6 +50,12 @@ worker.stdout.on('data', function (data) {
         histogram.push(tops[i]);
     }
 });
+worker.stderr.on('data', function (data) {
+    console.log('worker error: ' + data);
+});
+worker.on('close', function (code) {
+    console.log('worker exited with code ' + code);
+});
 
 //======================================================================================================================================================================================================================
 // background process: loading twitter stream data into database
