@@ -122,6 +122,7 @@ fs.readFile('./wordlist.txt', function (err, data) {
                 for (var i = 0; i < lines.length; i++) {
                     delete word_set[lines[i]];
                 }
+                console.log(word_set)
             }
         });
     }
@@ -132,7 +133,6 @@ module.exports = function(line) {
     line = line.replace(/[^\u0000-\u007E]/g, function(c){
        return diacriticsMap[c] || c;
     });
-    console.log(line);
 
     var words = line.match(word_group);
     if (!words) {

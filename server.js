@@ -63,7 +63,7 @@ var server = http.createServer(function (request, response) {
         for (var i = 0; i < result.length; i++) {
           var text = result[i].text;
           var words = getWords(text);
-          console.log(words);
+          // console.log(words);
           for (var j = 0; j < words.length; j++) {
             var word = words[j];
             console.log(word);
