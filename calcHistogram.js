@@ -9,17 +9,7 @@ var connection = mysql.createConnection({
   database : 'twitterdata',
 });
 
-connection.connect(function(err) {
-  if (err) {
-    console.log('worker error connecting:' + err.stack);
-    return
-  }
-
-  console.log('worder connected as id ' + connection.threadId);
-});
-
 function calcHistogram() {
-    console.log('start calcHistogram');
     connection.query('select text from streamdata', function (err, result) {
         if (!err) {
             var histogram = {};
