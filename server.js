@@ -34,7 +34,7 @@ var server = http.createServer(function (request, response) {
     });
   } else if (request.url === '/tweets') {
     response.writeHead(200, {'Content-Type': 'application/json'});
-    connection.query('select text, longitude, latitude, lang, created_at, screen_name from streamdata', function(err, result) {
+    connection.query('select text, longitude, latitude, lang, created_at, screen_name from streamdata', function (err, result) {
       if (err) {
         response.write(JSON.stringify({error: err}));
       } else {
@@ -44,7 +44,7 @@ var server = http.createServer(function (request, response) {
     });
   } else if (request.url === '/sample') {
     response.writeHead(200, {'Content-Type': 'text/html'});
-    connection.query('select * from streamdata limit 100', function(err, result) {
+    connection.query('select * from streamdata limit 100', function (err, result) {
       if (err) {
         response.write('select:'+err);
       } else {
@@ -52,9 +52,27 @@ var server = http.createServer(function (request, response) {
       }
       response.end();
     });
+  } else if (request.url === '/histogram') {
+    response.writeHead(200, {'Content-Type': 'text/html'});
+    var word_reg = /([a-zA-Z]+)/g;
+    var histogram = {};
+    connection.query('select text from streamdata', function (err, result) {
+      for (var i = 0; i < result.length; i++) {
+        var text = result[i].text;
+        var words = text.match(word_reg);
+        for (var j = 0; j < words.length; j++) {
+          if (words[j] in histogram) {
+            histogram[words[j]] = 1;
+          } else {
+            histogram[words[j]] += 1;
+          }
+        }
+      }
+      response.write('<html><head><meta charset="UTF-8"></head><body><p>count:'+JSON.stringify(histogram)+'</p></body></html>');
+    });
   } else if (request.url === '/count') {
     response.writeHead(200, {'Content-Type': 'text/html'});
-    connection.query('select count(*) as total_tweets from streamdata', function(err, result) {
+    connection.query('select count(*) as total_tweets from streamdata', function (err, result) {
       if (err) {
         response.write('count:'+err);
       } else {

@@ -27,8 +27,9 @@ connection.connect(function(err) {
 // timestamp_ms bigint,\
 // created_at varchar(255),\
 // user_id bigint,\
-// screen_name varchar(25),\
-// location varchar(255)\
+// screen_name varchar(25),
+// image_url varchar(255),\
+// location varchar(255),\
 // )engine=InnoDB DEFAULT CHARSET=utf8'
 
 // connection.query(create_table, function(err, result) {
