@@ -79,7 +79,8 @@ var server = http.createServer(function (request, response) {
         tuples.sort(function (x, y) {
           return y[1] - x[1];
         });
-        console.log(tuples.length)
+        console.log(histogram)
+        console.log(tuples)
         response.write('histogram:'+JSON.stringify(histogram)+'\n');
         response.write('histogram:'+JSON.stringify(tuples)+'\n');
       }
