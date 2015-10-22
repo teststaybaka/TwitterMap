@@ -3,8 +3,8 @@ var fs = require('fs');
 var WebSocketServer = require('ws').Server;
 var background = require('./background.js');
 var connection = background.connection;
+var getWords = require('./getwords.js');
 
-// http server:
 var static_path = /\/static\/(.*)/;
 var mimeTypes = {
   "html": "text/html",
@@ -54,7 +54,6 @@ var server = http.createServer(function (request, response) {
     });
   } else if (request.url === '/histogram') {
     response.writeHead(200, {'Content-Type': 'text/html'});
-    var word_reg = /([a-zA-Z]+)/g;
     var histogram = {};
     connection.query('select text from streamdata', function (err, result) {
       if (err) {
@@ -62,11 +61,8 @@ var server = http.createServer(function (request, response) {
       } else {
         for (var i = 0; i < result.length; i++) {
           var text = result[i].text;
-          var words = text.match(word_reg);
-          if (!words) continue;
-
+          var words = getWords(text);
           for (var j = 0; j < words.length; j++) {
-            var word = words[j].toLowerCase();
             if (word in histogram) {
               histogram[word] += 1;
             } else {
