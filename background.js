@@ -45,6 +45,7 @@ connection.connect(function(err) {
 var histogram = [];
 var worker = spawn('node', ['calcHistogram.js']);
 worker.stdout.on('data', function (data) {
+    data = data.toString();
     try {
         var tops = JSON.parse(data);
         histogram.length = 0;
