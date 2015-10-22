@@ -64,7 +64,7 @@ var server = http.createServer(function (request, response) {
           var text = result[i].text;
           var words = text.match(word_reg);
           if (!words) continue;
-          
+
           for (var j = 0; j < words.length; j++) {
             if (words[j] in histogram) {
               histogram[words[j]] += 1;
@@ -73,7 +73,13 @@ var server = http.createServer(function (request, response) {
             }
           }
         }
-        response.write('<html><head><meta charset="UTF-8"></head><body><p>count:'+JSON.stringify(histogram)+'</p></body></html>');
+
+        var tuples = [];
+        for (var key in histogram) tuples.push([key, histogram[key]]);
+        tuples.sort(function (x, y) {
+          return y[1] - x[1];
+        });
+        response.write('<html><head><meta charset="UTF-8"></head><body><p>count:'+JSON.stringify(tuples)+'</p></body></html>');
       }
       response.end();
     });
