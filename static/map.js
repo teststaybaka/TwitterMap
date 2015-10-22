@@ -46,14 +46,16 @@ google.maps.event.addDomListener(window, 'load', function() {
             $('.trigger-marker input').prop('checked', true);
             $('.trigger-marker input').change(function() {
                 if ($(this).is(':checked')) {
-                    markerCluster.addMarkers(markers, false);
+                    filterMarkers();
                 } else {
                     markerCluster.clearMarkers();
+                    oms.clearMarkers();
                 }
             });
+            $('.keywords-select').change(filterMarkers);
 
-            $('.keywords-select').change(function() {
-                var keywords = $(this).val();
+            function filterMarkers() {
+                var keywords = $('.keywords-select').val();
                 markerCluster.clearMarkers();
                 oms.clearMarkers();
                 if (keywords === 'All') {
@@ -72,7 +74,7 @@ google.maps.event.addDomListener(window, 'load', function() {
                     }
                     markerCluster.redraw();
                 }
-            });
+            }
 
             if (result.histogram) {
                 var histogram = result.histogram;
