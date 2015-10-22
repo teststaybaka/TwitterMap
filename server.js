@@ -62,9 +62,9 @@ var server = http.createServer(function (request, response) {
         var words = text.match(word_reg);
         for (var j = 0; j < words.length; j++) {
           if (words[j] in histogram) {
-            histogram[words[j]] = 1;
-          } else {
             histogram[words[j]] += 1;
+          } else {
+            histogram[words[j]] = 1;
           }
         }
       }
