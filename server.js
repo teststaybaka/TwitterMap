@@ -65,11 +65,12 @@ var server = http.createServer(function (request, response) {
           var words = text.match(word_reg);
           if (!words) continue;
 
-          for (var j = 0; j < words.length; j++) {
-            if (words[j] in histogram) {
-              histogram[words[j]] += 1;
+          for (var word in words) {
+            word = word.toLowerCase();
+            if (word in histogram) {
+              histogram[word] += 1;
             } else {
-              histogram[words[j]] = 1;
+              histogram[word] = 1;
             }
           }
         }
