@@ -97,7 +97,7 @@ wss.on('connection', function (ws) {
 });
 wss.on('error', function (evt) {
   console.log('WebSocket error: '+evt)
-})
+});
 
 twitterStream.on('data', function(tweet) {
   wss.clients.forEach(function (client) {

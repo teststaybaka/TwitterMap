@@ -45,35 +45,28 @@ google.maps.event.addDomListener(window, 'load', function() {
 
             $('.trigger-marker input').prop('checked', true);
             $('.trigger-marker input, .keywords-select').change(function() {
-                if ($('.trigger-marker input').is(':checked')) {
-                    filterMarkers();
-                } else {
-                    markerCluster.clearMarkers();
-                    oms.clearMarkers();
-                }
-            });
-
-            function filterMarkers() {
-                var keywords = $('.keywords-select').val();
                 markerCluster.clearMarkers();
                 oms.clearMarkers();
-                if (keywords === 'All') {
-                    markerCluster.addMarkers(markers, false);
-                    for (var i = 0; i < markers.length; i++) {
-                        oms.addMarker(marker);
-                    }
-                } else {
-                    var regex = new RegExp('(^|[^a-zA-Z])'+keywords+'($|[^a-zA-Z])');
-                    for (var i = 0; i < markers.length; i++) {
-                        var marker = markers[i];
-                        if (regex.test(marker.desc)) {
-                            markerCluster.addMarker(marker, true);
+                if ($('.trigger-marker input').is(':checked')) {
+                    var keywords = $('.keywords-select').val();
+                    if (keywords === 'All') {
+                        markerCluster.addMarkers(markers, false);
+                        for (var i = 0; i < markers.length; i++) {
                             oms.addMarker(marker);
                         }
+                    } else {
+                        var regex = new RegExp('(^|[^a-zA-Z])'+keywords+'($|[^a-zA-Z])');
+                        for (var i = 0; i < markers.length; i++) {
+                            var marker = markers[i];
+                            if (regex.test(marker.desc.toLowerCase())) {
+                                markerCluster.addMarker(marker, true);
+                                oms.addMarker(marker);
+                            }
+                        }
+                        markerCluster.redraw();
                     }
-                    markerCluster.redraw();
                 }
-            }
+            });
 
             if (result.histogram) {
                 var histogram = result.histogram;
