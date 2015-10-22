@@ -112,6 +112,18 @@ fs.readFile('./wordlist.txt', function (err, data) {
                 start = 1;
             }
         }
+
+        fs.readFile('./stopwords.txt', function (err, data) {
+            if (err) {
+                console.log('Load stopwords error:'+err);
+            } else {
+                data = data.toString();
+                var lines = data.split('\n');
+                for (var i = 0; i < lines.length; i++) {
+                    delete word_set[lines[i]];
+                }
+            }
+        });
     }
 });
 
