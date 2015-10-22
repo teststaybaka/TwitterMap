@@ -95,7 +95,9 @@ client.stream('statuses/sample', {stall_warnings: true}, function(stream) {
             });
             count += 1;
         }
-        console.log('tweets stored: '+count);
+        if (count) {
+            console.log('tweets stored: '+count);
+        }
     });
  
     stream.on('error', function(error) {
