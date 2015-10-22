@@ -32,9 +32,11 @@ connection.connect(function(err) {
 // location varchar(255),\
 // )engine=InnoDB DEFAULT CHARSET=utf8'
 
-// connection.query(create_table, function(err, result) {
-//   console.log('create table: '+err+' '+result);
-// })
+alter_table= 'ALTER TABLE streamdata ADD image_url varchar(255) AFTER screen_name';
+
+connection.query(alter_table, function(err, result) {
+  console.log('alter table: '+err+' '+result);
+})
 
 //======================================================================================================================================================================================================================
 // background process: loading twitter stream data into database
