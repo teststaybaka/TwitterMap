@@ -111,6 +111,7 @@ google.maps.event.addDomListener(window, 'load', function() {
                 markers.push(marker);
                 markerCluster.addMarker(marker, false);
                 oms.addMarker(marker);
+                console.log(tweet);
                 if (show_realtime) {
                     iw.setContent(marker.desc);
                     iw.setPosition(point);
@@ -131,7 +132,12 @@ google.maps.event.addDomListener(window, 'load', function() {
 
 function render_content(tweet) {
     var div = '<div>\
-                    <div class="map-marker-title">'+tweet.screen_name+':</div>\
+                    <div class="map-marker-title">\
+                        <a class="screen-name" target="_blank" href="https://twitter.com/'+tweet.screen_name+'">\
+                            <img class="image-url" src="'+tweet.image_url+'">\
+                            <span class="screen-name">'+tweet.screen_name+':</span>\
+                        </a>\
+                    </div>\
                     <div class="map-marker-content">'+tweet.text+'</div>\
                     <div class="map-marker-time">'+tweet.created_at+'</div>\
                 </div>';
@@ -140,7 +146,12 @@ function render_content(tweet) {
 
 function render_content_array(tweet) {
     var div = '<div>\
-                    <div class="map-marker-title">'+tweet[5]+':</div>\
+                    <div class="map-marker-title">\
+                        <a class="screen-name" target="_blank" href="https://twitter.com/'+tweet[5]+'">\
+                            <img class="image-url" src="'+tweet[6]+'">\
+                            <span class="screen-name">'+tweet[5]+':</span>\
+                        </a>\
+                    </div>\
                     <div class="map-marker-content">'+tweet[0]+'</div>\
                     <div class="map-marker-time">'+tweet[4]+'</div>\
                 </div>';

@@ -134,3 +134,22 @@ input[type=checkbox] {
     color: white;
     line-height: 20px;
 }
+
+a.screen-name {
+    text-decoration: none;
+    color: rgb(0,0,0);
+}
+
+a.screen-name:hover {
+    color: rgb(0,140,255);
+}
+
+img.image-url {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+span.screen-name {
+    display: inline-block;
+    vertical-align: middle;
+}
