@@ -122,7 +122,7 @@ google.maps.event.addDomListener(window, 'load', function() {
                 console.log('websocket error:'+evt)
             }
 
-            iw.on('position_changed', function() {
+            iw.addListener('position_changed', function() {
                 console.log('xxxxxxxxxxxxx');
             })
 
