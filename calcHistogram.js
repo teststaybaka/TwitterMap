@@ -2,7 +2,7 @@ var getWords = require('./getwords.js');
 var mysql = require('mysql');
 
 var connection = mysql.createConnection({
-  host     : 'aa121unjjx7r1pz.cwczbkmzwby7.us-west-2.rds.amazonaws.com',
+  host     : process.env.database_endpoint,
   user     : process.env.database_user,
   password : process.env.database_password,
   port     : '3306',
