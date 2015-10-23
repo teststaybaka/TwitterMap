@@ -111,7 +111,7 @@ google.maps.event.addDomListener(window, 'load', function() {
                 markers.push(marker);
                 markerCluster.addMarker(marker, false);
                 oms.addMarker(marker);
-                console.log(tweet);
+                console.log(event.data);
                 if (show_realtime) {
                     iw.setContent(marker.desc);
                     iw.setPosition(point);
@@ -134,7 +134,13 @@ function render_content(tweet) {
     var div = '<div>\
                     <div class="map-marker-title">\
                         <a class="screen-name" target="_blank" href="https://twitter.com/'+tweet.screen_name+'">\
-                            <img class="image-url" src="'+tweet.image_url+'">\
+                            <img class="image-url" src="'
+                            if (tweet.image_url) {
+                                div += tweet.image_url;
+                            } else {
+                                div += '/static/default_profile.png';
+                            }
+                            div += '">\
                             <span class="screen-name">'+tweet.screen_name+':</span>\
                         </a>\
                     </div>\
