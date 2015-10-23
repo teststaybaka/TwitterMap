@@ -10,6 +10,7 @@ var connection = mysql.createConnection({
 });
 
 function calcHistogram() {
+    console.log('start calcHistogram');
     connection.query('select text from streamdata', function (err, result) {
         if (!err) {
             var histogram = {};

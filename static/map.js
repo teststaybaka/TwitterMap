@@ -75,7 +75,7 @@ google.maps.event.addDomListener(window, 'load', function() {
                 }
             });
 
-            if (result.histogram) {
+            if (result.histogram.length != 0) {
                 var histogram = result.histogram;
                 var maximum = histogram[0][1];
                 for (var i = 0; i < histogram.length; i++) {
