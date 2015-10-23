@@ -341,7 +341,7 @@ la
 el
 just
 mi
-lastest
+latest
 da
 day
 se

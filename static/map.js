@@ -55,6 +55,7 @@ google.maps.event.addDomListener(window, 'load', function() {
                         }
                     } else {
                         var regex = new RegExp('(^|[^a-zA-Z])'+keywords+'($|[^a-zA-Z])');
+                        var count = 0;
                         for (var i = 0; i < markers.length; i++) {
                             var marker = markers[i];
                             var text = marker.desc.replace(/[^\u0000-\u007E]/g, function(c){
@@ -63,8 +64,10 @@ google.maps.event.addDomListener(window, 'load', function() {
                             if (regex.test(text.toLowerCase())) {
                                 markerCluster.addMarker(marker, true);
                                 oms.addMarker(marker);
+                                count += 1;
                             }
                         }
+                        console.log(count);
                         markerCluster.redraw();
                     }
                 }
@@ -122,9 +125,9 @@ google.maps.event.addDomListener(window, 'load', function() {
                 console.log('websocket error:'+evt)
             }
 
-            iw.addListener('position_changed', function() {
-                console.log('xxxxxxxxxxxxx');
-            })
+            // iw.addListener('position_changed', function() {
+            //     console.log('xxxxxxxxxxxxx');
+            // })
 
             $('.loading').addClass('hidden');
             $('.histogram-bar').each(function() {
