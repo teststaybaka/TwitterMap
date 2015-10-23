@@ -37,7 +37,7 @@ function calcHistogram() {
             });
 
             var tops = [];
-            for (var i = 0; i < Math.min(20, tuples.length); i++){
+            for (var i = 0; i < Math.min(15, tuples.length); i++){
                 tops.push(tuples[i]);
             }
             console.log(JSON.stringify(tops));
