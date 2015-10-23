@@ -43,11 +43,10 @@ google.maps.event.addDomListener(window, 'load', function() {
                 opacity: 1,
             });
 
-            $('.trigger-marker input').prop('checked', true);
-            $('.trigger-marker input, .keywords-select').change(function() {
+            $('.trigger.marker input, .keywords-select').change(function() {
                 markerCluster.clearMarkers();
                 oms.clearMarkers();
-                if ($('.trigger-marker input').is(':checked')) {
+                if ($('.trigger.marker input').is(':checked')) {
                     var keywords = $('.keywords-select').val();
                     if (keywords === 'All') {
                         markerCluster.addMarkers(markers, false);
@@ -87,6 +86,15 @@ google.maps.event.addDomListener(window, 'load', function() {
                 }
             }
 
+            var show_realtime = true;
+            $('.trigger.new-tweets input').change(function() {
+                if ($(this).is(':checked')) {
+                    show_realtime = true;
+                } else {
+                    show_realtime = false;
+                }
+            });
+
             var ws = new WebSocket("ws://" + window.location.hostname);
             ws.onopen = function (event) {
                 console.log('WebSocket connected!');
@@ -103,9 +111,11 @@ google.maps.event.addDomListener(window, 'load', function() {
                 markers.push(marker);
                 markerCluster.addMarker(marker, false);
                 oms.addMarker(marker);
-                iw.setContent(marker.desc);
-                iw.setPosition(point);
-                iw.open(map);
+                if (show_realtime) {
+                    iw.setContent(marker.desc);
+                    iw.setPosition(point);
+                    iw.open(map);
+                }
             }
             ws.onerror = function(evt) {
                 console.log('websocket error:'+evt)

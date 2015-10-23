@@ -63,11 +63,11 @@ body {
     font-size: 14px;
 }
 
-.trigger-marker {
+.trigger {
     margin-left: 5%;
     margin-top: 10px;
     font-size: 14px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     display: block;
     cursor: pointer;
 }
