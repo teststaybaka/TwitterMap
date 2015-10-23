@@ -61,8 +61,8 @@ google.maps.event.addDomListener(window, 'load', function() {
                             var text = marker.desc.replace(/[^\u0000-\u007E]/g, function(c){
                                return diacriticsMap[c] || c;
                             });
-                            console.log(keyword+' '+regex.test(text.toLowerCase())+' '+text);
                             if (regex.test(text.toLowerCase())) {
+                                console.log(keyword+' '+regex.test(text.toLowerCase())+' '+text);
                                 markerCluster.addMarker(marker, true);
                                 oms.addMarker(marker);
                                 count += 1;
