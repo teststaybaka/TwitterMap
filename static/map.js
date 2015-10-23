@@ -21,6 +21,7 @@ google.maps.event.addDomListener(window, 'load', function() {
                     position: points[i],
                 });
                 marker.desc = render_content(tweets[i]);
+                marker.text = tweets[i].text;
 
                 // marker.addListener('click', (function(marker) {
                 //     return function() { 
@@ -58,11 +59,11 @@ google.maps.event.addDomListener(window, 'load', function() {
                         var count = 0;
                         for (var i = 0; i < markers.length; i++) {
                             var marker = markers[i];
-                            var text = marker.desc.replace(/[^\u0000-\u007E]/g, function(c){
+                            var text = marker.text.replace(/[^\u0000-\u007E]/g, function(c){
                                return diacriticsMap[c] || c;
                             });
                             if (regex.test(text.toLowerCase())) {
-                                console.log(keyword+' '+regex.test(text.toLowerCase())+' '+text);
+                                // console.log(keyword+' '+regex.test(text.toLowerCase())+' '+text);
                                 markerCluster.addMarker(marker, true);
                                 oms.addMarker(marker);
                                 count += 1;
@@ -111,6 +112,7 @@ google.maps.event.addDomListener(window, 'load', function() {
                     position: point,
                 });
                 marker.desc = render_content_array(tweet);
+                marker.text = tweet[0];
 
                 markers.push(marker);
                 markerCluster.addMarker(marker, false);
