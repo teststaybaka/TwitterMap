@@ -122,6 +122,10 @@ google.maps.event.addDomListener(window, 'load', function() {
                 console.log('websocket error:'+evt)
             }
 
+            iw.on('position_changed', function() {
+                console.log('xxxxxxxxxxxxx');
+            })
+
             $('.loading').addClass('hidden');
             $('.histogram-bar').each(function() {
                 $(this).width($(this).attr('data-width'));
