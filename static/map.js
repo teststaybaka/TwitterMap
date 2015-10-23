@@ -56,7 +56,6 @@ google.maps.event.addDomListener(window, 'load', function() {
                         }
                     } else {
                         var regex = new RegExp('(^|[^a-zA-Z])'+keywords+'($|[^a-zA-Z])');
-                        var count = 0;
                         for (var i = 0; i < markers.length; i++) {
                             var marker = markers[i];
                             var text = marker.desc.replace(/[^\u0000-\u007E]/g, function(c){
@@ -65,11 +64,9 @@ google.maps.event.addDomListener(window, 'load', function() {
                             if (regex.test(text.toLowerCase())) {
                                 markerCluster.addMarker(marker, true);
                                 oms.addMarker(marker);
-                                count += 1;
                             }
                         }
                         markerCluster.redraw();
-                        console.log(count);
                     }
                 }
             });
@@ -95,7 +92,20 @@ google.maps.event.addDomListener(window, 'load', function() {
                 console.log('WebSocket connected!');
             }
             ws.onmessage = function (event) {
-                console.log(event.data);
+                var tweet = JSON.parse(event.data);
+                var point = new google.maps.LatLng(tweet[2], tweet[1]);
+                points.push(point);
+                var marker = new google.maps.Marker({
+                    position: point,
+                });
+                marker.desc = render_content(tweet);
+
+                markers.push(marker);
+                markerCluster.addMarker(marker, false);
+                oms.addMarker(marker);
+                iw.setContent(marker.desc);
+                iw.setPosition(point);
+                iw.open(map);
             }
             ws.onerror = function(evt) {
                 console.log('websocket error:'+evt)
@@ -114,6 +124,15 @@ function render_content(tweet) {
                     <div class="map-marker-title">'+tweet.screen_name+':</div>\
                     <div class="map-marker-content">'+tweet.text+'</div>\
                     <div class="map-marker-time">'+tweet.created_at+'</div>\
+                </div>';
+    return div;
+}
+
+function render_content_array(tweet) {
+    var div = '<div>\
+                    <div class="map-marker-title">'+tweet[5]+':</div>\
+                    <div class="map-marker-content">'+tweet[0]+'</div>\
+                    <div class="map-marker-time">'+tweet[4]+'</div>\
                 </div>';
     return div;
 }
