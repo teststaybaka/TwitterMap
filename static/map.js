@@ -98,7 +98,7 @@ google.maps.event.addDomListener(window, 'load', function() {
                 var marker = new google.maps.Marker({
                     position: point,
                 });
-                marker.desc = render_content(tweet);
+                marker.desc = render_content_array(tweet);
 
                 markers.push(marker);
                 markerCluster.addMarker(marker, false);
