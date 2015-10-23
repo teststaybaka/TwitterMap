@@ -47,20 +47,21 @@ google.maps.event.addDomListener(window, 'load', function() {
                 markerCluster.clearMarkers();
                 oms.clearMarkers();
                 if ($('.trigger.marker input').is(':checked')) {
-                    var keywords = $('.keywords-select').val();
-                    if (keywords === 'All') {
+                    var keyword = $('.keywords-select').val();
+                    if (keyword === 'All') {
                         markerCluster.addMarkers(markers, false);
                         for (var i = 0; i < markers.length; i++) {
                             oms.addMarker(marker);
                         }
                     } else {
-                        var regex = new RegExp('(^|[^a-zA-Z])'+keywords+'($|[^a-zA-Z])');
+                        var regex = new RegExp('(^|[^a-zA-Z])'+keyword+'($|[^a-zA-Z])');
                         var count = 0;
                         for (var i = 0; i < markers.length; i++) {
                             var marker = markers[i];
                             var text = marker.desc.replace(/[^\u0000-\u007E]/g, function(c){
                                return diacriticsMap[c] || c;
                             });
+                            console.log(keyword+' '+regex.test(text.toLowerCase())+' '+text);
                             if (regex.test(text.toLowerCase())) {
                                 markerCluster.addMarker(marker, true);
                                 oms.addMarker(marker);
