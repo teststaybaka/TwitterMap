@@ -81,7 +81,9 @@ var server = http.createServer(function (request, response) {
   } else {
     NotFound(response);
   }
-}).listen(process.env.PORT || 80);
+}).listen(process.env.PORT || 80, function() {
+  console.log(server.address());
+});
 
 var wss = new WebSocketServer({server: server});
 wss.on('connection', function (ws) {
