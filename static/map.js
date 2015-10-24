@@ -115,10 +115,10 @@ google.maps.event.addDomListener(window, 'load', function() {
                 marker.text = tweet[0];
 
                 markers.push(marker);
-                markerCluster.addMarker(marker, false);
-                oms.addMarker(marker);
                 console.log(event.data);
                 if (show_realtime) {
+                    markerCluster.addMarker(marker, false);
+                    oms.addMarker(marker);
                     iw.setContent(marker.desc);
                     iw.setPosition(point);
                     iw.open(map);
