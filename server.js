@@ -108,7 +108,7 @@ twitterStream.on('data', function(tweet) {
   });
 });
 
-var sqs = AWS.SQS();
+var sqs = new AWS.SQS();
 sqs.createQueue({
   QueueName: 'MyQueue'
 }, function(err, data) {
