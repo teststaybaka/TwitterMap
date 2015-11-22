@@ -108,8 +108,8 @@ twitterStream.on('data', function(tweet) {
   });
 });
 
-var sqs = new AWS.SQS(options={
-  regin: 'us-west-2'
+var sqs = new AWS.SQS(options = {
+  region: 'us-west-2'
 });
 sqs.createQueue({
   QueueName: 'MyQueue'
