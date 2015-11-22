@@ -112,6 +112,8 @@ console.log(process.env.database_endpoint)
 console.log(process.env.aws_access_key_id)
 console.log(process.env.aws_secret_access_key)
 var sqs = new AWS.SQS(options = {
+  accessKeyId: process.env.aws_access_key_id,
+  secretAccessKey: process.env.aws_secret_access_key,
   region: 'us-west-2',
 });
 sqs.createQueue({
