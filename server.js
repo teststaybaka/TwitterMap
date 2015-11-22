@@ -118,4 +118,12 @@ sqs.createQueue({
 }, function(err, data) {
   if (err) console.log(err, err.stack);
   else console.log(data);
+
+  sqs.sendMessage({
+    MessageBody: 'Hello world!',
+    QueueUrl: data.QueueUrl,
+  }, function(err, data) {
+    if (err) console.log(err, err.stack);
+    else console.log(data);
+  });
 });
