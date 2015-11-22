@@ -110,8 +110,8 @@ twitterStream.on('data', function(tweet) {
 
 var sqs = AWS.SQS();
 sqs.createQueue({
-  QueueName: 'MyQueue'}
+  QueueName: 'MyQueue'
 }, function(err, data) {
   if (err) console.log(err, err.stack);
   else consoel.log(data);
-})
+});
