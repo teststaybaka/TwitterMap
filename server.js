@@ -3,7 +3,6 @@ var fs = require('fs');
 var WebSocketServer = require('ws').Server;
 var background = require('./background.js');
 var AQS = require('aws-sdk');
-var sqs = AWS.SQS();
 var connection = background.connection;
 var histogram = background.histogram;
 var twitterStream = background.twitterStream;
@@ -108,3 +107,11 @@ twitterStream.on('data', function(tweet) {
     client.send(JSON.stringify(tweet));
   });
 });
+
+var sqs = AWS.SQS();
+sqs.createQueue({
+  QueueName: 'MyQueue'}
+}, function(err, data) {
+  if (err) console.log(err, err.stack);
+  else consoel.log(data);
+})
