@@ -109,8 +109,8 @@ var AWS = require('aws-sdk');
 // });
 
 var sqs = new AWS.SQS(options = {
-  accessKeyId: 'AKIAIBVCMRCNH7SN4LTQ',
-  secretAccessKey: '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',
+  accessKeyId: process.env.aws_access_key_id,
+  secretAccessKey: process.env.aws_secret_access_key,
   region: 'us-west-2',
 });
 sqs.createQueue({
