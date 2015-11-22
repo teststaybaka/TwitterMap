@@ -114,7 +114,7 @@ var sqs = new AWS.SQS(options = {
   region: 'us-west-2',
 });
 sqs.createQueue({
-  QueueName: 'MyQueue'
+  QueueName: 'TwitQueue'
 }, function(err, data) {
   if (err) console.log(err, err.stack);
   else consoel.log(data);
