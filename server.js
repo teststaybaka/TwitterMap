@@ -108,41 +108,42 @@ var server = http.createServer(function (request, response) {
 //   });
 // });
 
-var sqs = new AWS.SQS(options = {
-  accessKeyId: process.env.aws_access_key_id,
-  secretAccessKey: process.env.aws_secret_access_key,
-  region: 'us-west-2',
-});
-sqs.createQueue({
-  QueueName: 'TwitQueue'
-}, function(err, data) {
-  if (err) {
-    console.log(err, err.stack);
-    return;
-  }
-  console.log(data);
-  var QueueUrl = data.QueueUrl;
+console.log('??????')
+// var sqs = new AWS.SQS(options = {
+//   accessKeyId: process.env.aws_access_key_id,
+//   secretAccessKey: process.env.aws_secret_access_key,
+//   region: 'us-west-2',
+// });
+// sqs.createQueue({
+//   QueueName: 'TwitQueue'
+// }, function(err, data) {
+//   if (err) {
+//     console.log(err, err.stack);
+//     return;
+//   }
+//   console.log(data);
+//   var QueueUrl = data.QueueUrl;
 
-  sqs.sendMessage({
-    MessageBody: 'Hello world!',
-    QueueUrl: QueueUrl,
-  }, function(err, data) {
-    if (err) {
-      console.log(err, err.stack);
-      return;
-    }
-    console.log(data);
+//   sqs.sendMessage({
+//     MessageBody: 'Hello world!',
+//     QueueUrl: QueueUrl,
+//   }, function(err, data) {
+//     if (err) {
+//       console.log(err, err.stack);
+//       return;
+//     }
+//     console.log(data);
 
-    sqs.receiveMessage({
-      QueueUrl: QueueUrl,
-      VisibilityTimeout: 0,
-      WaitTimeSeconds : 10,
-    }, function(err, data) {
-      if (err) {
-        console.log(err, err.stack);
-        return;
-      }
-      console.log(data);
-    })
-  });
-});
+//     sqs.receiveMessage({
+//       QueueUrl: QueueUrl,
+//       VisibilityTimeout: 0,
+//       WaitTimeSeconds : 10,
+//     }, function(err, data) {
+//       if (err) {
+//         console.log(err, err.stack);
+//         return;
+//       }
+//       console.log(data);
+//     })
+//   });
+// });
