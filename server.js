@@ -116,14 +116,33 @@ var sqs = new AWS.SQS(options = {
 sqs.createQueue({
   QueueName: 'TwitQueue'
 }, function(err, data) {
-  if (err) console.log(err, err.stack);
-  else console.log(data);
+  if (err) {
+    console.log(err, err.stack);
+    return;
+  }
+  console.log(data);
+  var QueueUrl = data.QueueUrl;
 
   sqs.sendMessage({
     MessageBody: 'Hello world!',
-    QueueUrl: data.QueueUrl,
+    QueueUrl: QueueUrl,
   }, function(err, data) {
-    if (err) console.log(err, err.stack);
-    else console.log(data);
+    if (err) {
+      console.log(err, err.stack);
+      return;
+    }
+    console.log(data);
+
+    sqs.receiveMessage({
+      QueueUrl: QueueUrl,
+      VisibilityTimeout: 0,
+      WaitTimeSeconds : 10,
+    }, function(err, data) {
+      if (err) {
+        console.log(err, err.stack);
+        return;
+      }
+      console.log(data);
+    })
   });
 });
