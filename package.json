@@ -6,5 +6,9 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "ws": "0.8.0",
+    "twitter": "1.2.5",
+    "aws-sdk": "2.2.18",
+    "mysql": "2.9.0"
   }
 }
