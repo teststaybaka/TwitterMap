@@ -108,6 +108,8 @@ var AWS = require('aws-sdk');
 //   });
 // });
 
+console.log(process.env.aws_access_key_id)
+console.log(process.env.aws_secret_access_key)
 var sqs = new AWS.SQS(options = {
   accessKeyId: process.env.aws_access_key_id,
   secretAccessKey: process.env.aws_secret_access_key,
