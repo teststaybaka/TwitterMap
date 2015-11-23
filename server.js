@@ -70,6 +70,8 @@ var server = http.createServer(function (request, response) {
       params += data;
 
       if (params.length > 1e6) {
+        response.writeHead(403, {'Content-Type': 'text/html'});
+        response.end('done');
         request.connection.destroy();
       }
     });
@@ -77,10 +79,10 @@ var server = http.createServer(function (request, response) {
     request.on('end', function() {
       // var params = querystring.parse(params);
       console.log(params);
+
+      response.writeHead(200, {'Content-Type': 'text/html'});
+      response.end('done');
     });
-    
-    response.writeHead(200, {'Content-Type': 'text/html'});
-    response.end('done');
   } else if (static_path.test(request.url)) {
     fs.readFile('.'+request.url, function (err, data) {
       if (err) {
