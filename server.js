@@ -2,8 +2,8 @@ var http = require('http');
 var fs = require('fs');
 var querystring = require('querystring');
 var WebSocketServer = require('ws').Server;
-var background = require('./background.js');
-var connection = background.connection;
+var publisher = require('./publisher.js');
+var connection = publisher.connection;
 
 var static_path = /\/static\/(.*)/;
 var mimeTypes = {
