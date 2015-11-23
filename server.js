@@ -68,14 +68,14 @@ var server = http.createServer(function (request, response) {
     var params = ''
     request.on('data', function(data) {
       params += data;
-
+      console.log(data.toString());
       if (params.length > 1e6) {
         request.connection.destroy();
       }
     });
 
     request.on('end', function() {
-      var params = querystring.parse(params);
+      // var params = querystring.parse(params);
       console.log(params);
     });
   } else if (static_path.test(request.url)) {
