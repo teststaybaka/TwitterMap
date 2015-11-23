@@ -75,6 +75,7 @@ var server = http.createServer(function (request, response) {
 
     request.on('end', function() {
       var params = querystring.parse(params);
+      console.log(params);
     });
   } else if (static_path.test(request.url)) {
     fs.readFile('.'+request.url, function (err, data) {
