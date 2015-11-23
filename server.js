@@ -69,7 +69,7 @@ var server = http.createServer(function (request, response) {
     request.on('data', function(data) {
       params += data;
 
-      if (body.length > 1e6) {
+      if (params.length > 1e6) {
         request.connection.destroy();
       }
     });
