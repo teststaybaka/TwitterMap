@@ -25,12 +25,15 @@ sqs.createQueue({
             VisibilityTimeout: 0,
             WaitTimeSeconds : 10,
         }, function(err, data) {
-            self.emit('done');
             if (err) {
+                self.emit('done');
                 console.log(err, err.stack);
                 return;
             }
-            if (!data.Messages) return;
+            if (!data.Messages) {
+                self.emit('done');
+                return;
+            }
             
             var messages = data.Messages;
             console.log('SQS received.');
@@ -39,6 +42,7 @@ sqs.createQueue({
                 QueueUrl: QueueUrl,
                 ReceiptHandle: messages[0].ReceiptHandle,
             }, function(err, data) {
+                self.emit('done');
                 if (err) {
                     console.log(err, err.stack);
                     return;
