@@ -44,16 +44,7 @@ connection.connect(function(err) {
 // workers
 var worker = fork('./consuer.js');
 worker.stdout.on('data', function (data) {
-    data = data.toString();
-    try {
-        var tops = JSON.parse(data);
-        histogram.length = 0;
-        for (var i = 0; i < tops.length; i++) {
-            histogram.push(tops[i]);
-        }
-    } catch(e) {
-        console.log('worker: '+data);
-    }
+    console.log('worker: '+data);
 });
 worker.stderr.on('data', function (data) {
     console.log('worker error: ' + data);
