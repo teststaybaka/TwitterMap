@@ -1,28 +1,26 @@
 var http = require('http');
 var fs = require('fs');
-// var WebSocketServer = require('ws').Server;
-// var background = require('./background.js');
-var AWS = require('aws-sdk');
-// var connection = background.connection;
-// var histogram = background.histogram;
-// var twitterStream = background.twitterStream;
+var querystring = require('querystring');
+var WebSocketServer = require('ws').Server;
+var background = require('./background.js');
+var connection = background.connection;
 
-// var static_path = /\/static\/(.*)/;
-// var mimeTypes = {
-//   "html": "text/html",
-//   "jpeg": "image/jpeg",
-//   "jpg": "image/jpeg",
-//   "png": "image/png",
-//   "gif": 'image/gif',
-//   "js": "text/javascript",
-//   "css": "text/css"
-// };
+var static_path = /\/static\/(.*)/;
+var mimeTypes = {
+  "html": "text/html",
+  "jpeg": "image/jpeg",
+  "jpg": "image/jpeg",
+  "png": "image/png",
+  "gif": 'image/gif',
+  "js": "text/javascript",
+  "css": "text/css"
+};
 
-// function NotFound(response) {
-//   response.writeHead(200, {'Content-Type': 'text/plain'});
-//   response.write('404 Not Found\n');
-//   response.end();
-// }
+function NotFound(response) {
+  response.writeHead(200, {'Content-Type': 'text/plain'});
+  response.write('404 Not Found\n');
+  response.end();
+}
 
 var server = http.createServer(function (request, response) {
   // console.log(request.url);
@@ -64,6 +62,19 @@ var server = http.createServer(function (request, response) {
         response.write('<html><head><meta charset="UTF-8"></head><body><p>count:'+JSON.stringify(result)+'</p></body></html>');
       }
       response.end();
+    });
+  } else if (request.url === '/new_tweet') {
+    var params = ''
+    request.on('data', function(data) {
+      params += data;
+
+      if (body.length > 1e6) {
+        request.connection.destroy();
+      }
+    });
+
+    request.on('end', function() {
+      var params = querystring.parse(params);
     });
   } else if (static_path.test(request.url)) {
     fs.readFile('.'+request.url, function (err, data) {
@@ -107,54 +118,3 @@ var server = http.createServer(function (request, response) {
 //     client.send(JSON.stringify(tweet));
 //   });
 // });
-
-var sqs = new AWS.SQS(options = {
-  accessKeyId: process.env.aws_access_key_id,
-  secretAccessKey: process.env.aws_secret_access_key,
-  region: 'us-west-2',
-});
-sqs.createQueue({
-  QueueName: 'TwitQueue'
-}, function(err, data) {
-  if (err) {
-    console.log(err, err.stack);
-    return;
-  }
-  console.log(data);
-  var QueueUrl = data.QueueUrl;
-
-  sqs.sendMessage({
-    MessageBody: 'Hello world!',
-    QueueUrl: QueueUrl,
-  }, function(err, data) {
-    if (err) {
-      console.log(err, err.stack);
-      return;
-    }
-    console.log(data);
-
-    sqs.receiveMessage({
-      QueueUrl: QueueUrl,
-      VisibilityTimeout: 0,
-      WaitTimeSeconds : 10,
-    }, function(err, data) {
-      if (err) {
-        console.log(err, err.stack);
-        return;
-      }
-      var messages = data.Messages;
-      console.log(messages[0]);
-
-      sqs.deleteMessage({
-        QueueUrl: QueueUrl,
-        ReceiptHandle: messages[0].ReceiptHandle,
-      }, function(err, data) {
-        if (err) {
-          console.log(err, err.stack);
-          return;
-        }
-        console.log(data);
-      });
-    })
-  });
-});
