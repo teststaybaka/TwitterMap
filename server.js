@@ -64,6 +64,7 @@ var server = http.createServer(function (request, response) {
       response.end();
     });
   } else if (request.url === '/new_tweet') {
+    console.log(request.headers);
     var params = ''
     request.on('data', function(data) {
       params += data;
