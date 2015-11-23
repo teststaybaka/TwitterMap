@@ -65,7 +65,7 @@ var server = http.createServer(function (request, response) {
     });
   } else if (request.url === '/new_tweet') {
     console.log(request.headers);
-    var params = ''
+    var params = '';
     request.on('data', function(data) {
       params += data;
 
@@ -132,7 +132,8 @@ wss.on('error', function (evt) {
 });
 
 function broadcast_new_tweet(tweet) {
-  var tweet = JSON.stringify(tweet);
+  tweet = JSON.stringify(tweet);
+  console.log('Braodcasting:'+tweet);
   wss.clients.forEach(function (client) {
     client.send(tweet);
   });
