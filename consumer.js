@@ -29,7 +29,7 @@ sqs.createQueue({
         sqs.receiveMessage({
             QueueUrl: QueueUrl,
             VisibilityTimeout: 0,
-            WaitTimeSeconds : 10,
+            WaitTimeSeconds : 20,
         }, function(err, data) {
             if (err) {
                 self.emit('done');
