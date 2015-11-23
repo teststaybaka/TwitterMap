@@ -7,6 +7,12 @@ var sqs = new AWS.SQS(options = {
     region: 'us-west-2',
 });
 
+var sns = new AWS.SNS(options = {
+    accessKeyId: process.env.aws_access_key_id,
+    secretAccessKey: process.env.aws_secret_access_key,
+    region: 'us-west-2',
+});
+
 sqs.createQueue({
     QueueName: 'TwitQueue'
 }, function(err, data) {
@@ -38,6 +44,19 @@ sqs.createQueue({
             var messages = data.Messages;
             console.log('SQS received.');
             console.log(messages[0]);
+
+            sns.publish({
+                Message: messages[0].Body,
+                TopicArn: 'arn:aws:sns:us-west-2:976165153118:Tweets',
+            }, function(err, data) {
+                if (err) {
+                    console.log(err, err.stack);
+                    return;
+                }
+                console.log('SNS published.');
+                console.log(data);
+            });
+
             sqs.deleteMessage({
                 QueueUrl: QueueUrl,
                 ReceiptHandle: messages[0].ReceiptHandle,

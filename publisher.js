@@ -64,6 +64,7 @@ var sqs = new AWS.SQS(options = {
     secretAccessKey: process.env.aws_secret_access_key,
     region: 'us-west-2',
 });
+
 sqs.createQueue({
     QueueName: 'TwitQueue'
 }, function(err, data) {
@@ -109,4 +110,5 @@ sqs.createQueue({
 
 module.exports = {
     connection: connection,
+    AWS: AWS,
 }
