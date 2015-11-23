@@ -105,6 +105,8 @@ sqs.createQueue({
                           console.log(err, err.stack);
                           return;
                         }
+                        console.log('SQS sent.');
+                        console.log(data);
                     });
                 });
             }

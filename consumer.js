@@ -29,6 +29,7 @@ sqs.createQueue({
         if (!data.Messages) return;
         
         var messages = data.Messages;
+        console.log('SQS received.');
         console.log(messages[0]);
         sqs.deleteMessage({
             QueueUrl: QueueUrl,
@@ -38,6 +39,7 @@ sqs.createQueue({
                 console.log(err, err.stack);
                 return;
             }
+            console.log('SQS deleted.');
             console.log(data);
         });
     });
