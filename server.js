@@ -79,9 +79,20 @@ var server = http.createServer(function (request, response) {
     request.on('end', function() {
       // var params = querystring.parse(params);
       console.log(params);
+      params = JSON.parse(params);
+      message = JSON.parse(params.Message);
 
-      response.writeHead(200, {'Content-Type': 'text/html'});
-      response.end('done');
+      connection.query('select text, longitude, latitude, lang, created_at, screen_name, image_url from streamdata where id='+message.tweet_id, function (err, result) {
+        if (err) {
+          response.writeHead(403, {'Content-Type': 'text/html'});
+          // response.write(JSON.stringify({error: err}));
+        } else {
+          response.writeHead(200, {'Content-Type': 'text/html'});
+          broadcast_new_tweet(result)
+          // response.write(JSON.stringify({tweets: result, histogram: histogram}));
+        }
+        response.end('done');
+      });
     });
   } else if (static_path.test(request.url)) {
     fs.readFile('.'+request.url, function (err, data) {
@@ -104,24 +115,25 @@ var server = http.createServer(function (request, response) {
   console.log(server.address());
 });
 
-// var wss = new WebSocketServer({server: server});
-// wss.on('connection', function (ws) {
-//   // var location = url.parse(ws.upgradeReq.url, true);
-//   // you might use location.query.access_token to authenticate or share sessions
-//   // or ws.upgradeReq.headers.cookie (see http://stackoverflow.com/a/16395220/151312)
+var wss = new WebSocketServer({server: server});
+wss.on('connection', function (ws) {
+  // var location = url.parse(ws.upgradeReq.url, true);
+  // you might use location.query.access_token to authenticate or share sessions
+  // or ws.upgradeReq.headers.cookie (see http://stackoverflow.com/a/16395220/151312)
 
-//   // ws.on('message', function incoming(message) {
-//   //   console.log('received: %s', message);
-//   // });
+  // ws.on('message', function incoming(message) {
+  //   console.log('received: %s', message);
+  // });
 
-//   console.log('WebSocket connection established.');
-// });
-// wss.on('error', function (evt) {
-//   console.log('WebSocket error: '+evt)
-// });
+  console.log('WebSocket connection established.');
+});
+wss.on('error', function (evt) {
+  console.log('WebSocket error: '+evt)
+});
 
-// twitterStream.on('data', function(tweet) {
-//   wss.clients.forEach(function (client) {
-//     client.send(JSON.stringify(tweet));
-//   });
-// });
+function broadcast_new_tweet(tweet) {
+  var tweet = JSON.stringify(tweet);
+  wss.clients.forEach(function (client) {
+    client.send(tweet);
+  });
+}
