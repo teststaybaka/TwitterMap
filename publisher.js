@@ -43,14 +43,11 @@ connection.connect(function(err) {
 //================================================================================================================================================================================
 // workers
 var worker = fork('./consuer.js');
-worker.stdout.on('data', function (data) {
-    console.log('worker: '+data);
-});
-worker.stderr.on('data', function (data) {
-    console.log('worker error: ' + data);
+worker.on('message', function (message) {
+    console.log('worker:'+message);
 });
 worker.on('close', function (code) {
-    console.log('worker exited with code ' + code);
+    console.log('worker closed with code '+code);
 });
 
 //======================================================================================================================================================================================================================
