@@ -83,7 +83,8 @@ var server = http.createServer(function (request, response) {
       message = JSON.parse(params.Message);
 
       connection.query('select text, longitude, latitude, lang, created_at, screen_name, image_url from streamdata where id='+message.tweet_id, function (err, result) {
-        if (err) {
+        if (err || result.length !== 1) {
+          console.log('Invalid result from tweet id:'+message.tweet_id);
           response.writeHead(403, {'Content-Type': 'text/html'});
           // response.write(JSON.stringify({error: err}));
         } else {
