@@ -42,7 +42,7 @@ connection.connect(function(err) {
 
 //================================================================================================================================================================================
 // workers
-var worker = fork('./consuer.js');
+var worker = fork('./consumer.js');
 worker.on('message', function (message) {
     console.log('worker:'+message);
 });
