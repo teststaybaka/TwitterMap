@@ -78,6 +78,9 @@ var server = http.createServer(function (request, response) {
       // var params = querystring.parse(params);
       console.log(params);
     });
+    
+    response.writeHead(200, {'Content-Type': 'text/html'});
+    response.end('done');
   } else if (static_path.test(request.url)) {
     fs.readFile('.'+request.url, function (err, data) {
       if (err) {
