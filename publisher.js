@@ -35,15 +35,15 @@ connection.connect(function(err) {
 // score double\
 // )engine=InnoDB DEFAULT CHARSET=utf8'
 
-alter_table= 'ALTER TABLE streamdata ADD score double AFTER location';
+// alter_table= 'ALTER TABLE streamdata ADD score double AFTER location';
 
-connection.query(alter_table, function(err, result) {
-  console.log('alter table: '+err+' '+result);
-});
+// connection.query(alter_table, function(err, result) {
+//   console.log('alter table: '+err+' '+result);
+// });
 
-connection.query('delete from streamdata', function(err, result) {
-  console.log('delete rows: '+err+' '+result);
-});
+// connection.query('delete from streamdata', function(err, result) {
+//   console.log('delete rows: '+err+' '+result);
+// });
 
 //================================================================================================================================================================================
 // workers

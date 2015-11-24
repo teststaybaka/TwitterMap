@@ -49,7 +49,8 @@ sqs.createQueue({
             var body = JSON.parse(messages[0].Body);
             var options = {
                 hostname: 'www.tweetsentimentapi.com',
-                path: '/api/?key='+process.env.sentiment_analysis_api_key+'&text='+body.tweet_text,
+                path: '/api/?key='+encodeURIComponent(process.env.sentiment_analysis_api_key)
+                    +'&text='+encodeURIComponent(body.tweet_text),
                 method: 'GET',
                 accept: '*/*',
             }
