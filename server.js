@@ -104,7 +104,8 @@ var server = http.createServer(function (request, response) {
           console.log(err);
           return
         }
-        console.log(result);
+        console.log('Updated successfully.')
+        // console.log(result);
       })
     });
   } else if (static_path.test(request.url)) {

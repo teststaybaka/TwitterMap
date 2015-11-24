@@ -42,10 +42,10 @@ connection.connect(function(err) {
 //     else console.log(result);
 // });
 
-connection.query('delete from streamdata', function(err, result) {
-    if (err) console.log(err);
-    else console.log(result);
-});
+// connection.query('delete from streamdata', function(err, result) {
+//     if (err) console.log(err);
+//     else console.log(result);
+// });
 
 //================================================================================================================================================================================
 // workers
