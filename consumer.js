@@ -47,6 +47,7 @@ sqs.createQueue({
             console.log(messages[0]);
 
             var body = JSON.parse(messages[0].Body);
+            console.log(encodeURIComponent(body.tweet_text));
             var options = {
                 hostname: 'www.tweetsentimentapi.com',
                 path: '/api/?key='+encodeURIComponent(process.env.sentiment_analysis_api_key)
