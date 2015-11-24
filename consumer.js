@@ -77,6 +77,7 @@ sqs.createQueue({
                     });
                 });
             });
+            req.end();
 
             sqs.deleteMessage({
                 QueueUrl: QueueUrl,

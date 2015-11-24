@@ -38,11 +38,13 @@ connection.connect(function(err) {
 // alter_table= 'ALTER TABLE streamdata ADD score double AFTER location';
 
 // connection.query(alter_table, function(err, result) {
-//   console.log('alter table: '+err+' '+result);
+//     if (err) console.log(err);
+//     else console.log(result);
 // });
 
 // connection.query('delete from streamdata', function(err, result) {
-//   console.log('delete rows: '+err+' '+result);
+//     if (err) console.log(err);
+//     else console.log(result);
 // });
 
 //================================================================================================================================================================================
