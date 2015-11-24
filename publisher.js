@@ -117,4 +117,5 @@ sqs.createQueue({
 
 module.exports = {
     connection: connection,
+    mysql: mysql,
 }
