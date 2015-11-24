@@ -50,7 +50,7 @@ google.maps.event.addDomListener(window, 'load', function() {
 
                 index = Math.min(index, numStyles);
                 return {
-                    text: count+'\n'+Math.round(accumulator*1000)/1000,
+                    text: count+'<br>'+Math.round(accumulator*1000)/1000,
                     index: index
                 };
             });
@@ -68,9 +68,15 @@ google.maps.event.addDomListener(window, 'load', function() {
                     for (var i = 0; i < markers.length; i++) {
                         oms.addMarker(marker);
                     }
+                    oms.addListener('click', function(marker, event) {
+                        console.log('click');
+                        iw.setContent(marker.desc);
+                        iw.open(map, marker);
+                    });
                 } else {
                     oms.clearMarkers();
                     markerCluster.clearMarkers();
+                    oms.removeListener('click');
                 }
             });
 
