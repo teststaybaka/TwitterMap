@@ -40,7 +40,7 @@ var server = http.createServer(function (request, response) {
       if (err) {
         response.write(JSON.stringify({error: err}));
       } else {
-        response.write(JSON.stringify({tweets: result, histogram: histogram}));
+        response.write(JSON.stringify(result));
       }
       response.end();
     });
