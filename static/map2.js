@@ -15,6 +15,11 @@ google.maps.event.addDomListener(window, 'load', function() {
             var markers = [];
             var iw = new google.maps.InfoWindow();
             var oms = new OverlappingMarkerSpiderfier(map);
+            oms.addListener('click', function(marker, event) {
+                console.log('click');
+                iw.setContent(marker.desc);
+                iw.open(map, marker);
+            });
             for (var i = 0; i < tweets.length; i++) {
                 points.push(new google.maps.LatLng(tweets[i].latitude, tweets[i].longitude));
                 var marker = new google.maps.Marker({
@@ -26,11 +31,6 @@ google.maps.event.addDomListener(window, 'load', function() {
                 markers.push(marker);
                 oms.addMarker(marker);
             }
-            oms.addListener('click', function(marker, event) {
-                console.log('click');
-                iw.setContent(marker.desc);
-                iw.open(map, marker);
-            });
 
             var markerCluster = new MarkerClusterer(map, markers, {ignoreHidden: true, gridSize: 50, maxZoom: 15});
             var heatmap = new google.maps.visualization.HeatmapLayer({
