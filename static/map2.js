@@ -27,6 +27,7 @@ google.maps.event.addDomListener(window, 'load', function() {
                 oms.addMarker(marker);
             }
             oms.addListener('click', function(marker, event) {
+                console.log('click');
                 iw.setContent(marker.desc);
                 iw.open(map, marker);
             });
