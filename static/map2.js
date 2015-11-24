@@ -50,7 +50,7 @@ google.maps.event.addDomListener(window, 'load', function() {
 
                 index = Math.min(index, numStyles);
                 return {
-                    text: count+'<br>'+Math.round(accumulator*1000)/1000,
+                    text: Math.round(accumulator*1000)/1000,
                     index: index
                 };
             });
@@ -65,18 +65,13 @@ google.maps.event.addDomListener(window, 'load', function() {
             $('.trigger.marker input').change(function() {
                 if ($('.trigger.marker input').is(':checked')) {
                     markerCluster.addMarkers(markers, false);
-                    for (var i = 0; i < markers.length; i++) {
-                        oms.addMarker(marker);
-                    }
-                    oms.addListener('click', function(marker, event) {
-                        console.log('click');
-                        iw.setContent(marker.desc);
-                        iw.open(map, marker);
-                    });
+                    // for (var i = 0; i < markers.length; i++) {
+                    //     oms.addMarker(marker);
+                    // }
                 } else {
-                    oms.clearMarkers();
+                    // oms.clearMarkers();
                     markerCluster.clearMarkers();
-                    oms.removeListener('click');
+                    // oms.removeListener('click');
                 }
             });
 
