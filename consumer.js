@@ -62,8 +62,10 @@ sqs.createQueue({
                         console.log(data.message);
                         return;
                     }
-                    body.score = data.score;
+                    console.log('Sentiment received.');
+                    console.log(data);
 
+                    body.score = data.score;
                     sns.publish({
                         Message: JSON.stringify(body),
                         TopicArn: 'arn:aws:sns:us-west-2:976165153118:Tweets',
