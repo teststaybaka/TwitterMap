@@ -39,36 +39,17 @@ google.maps.event.addDomListener(window, 'load', function() {
                 radius: 20,
             });
 
-            // $('.trigger.marker input, .keywords-select').change(function() {
-            //     markerCluster.clearMarkers();
-            //     oms.clearMarkers();
-            //     if ($('.trigger.marker input').is(':checked')) {
-            //         var keyword = $('.keywords-select').val();
-            //         if (keyword === 'All') {
-            //             markerCluster.addMarkers(markers, false);
-            //             for (var i = 0; i < markers.length; i++) {
-            //                 oms.addMarker(marker);
-            //             }
-            //         } else {
-            //             var regex = new RegExp('(^|[^a-zA-Z])'+keyword+'($|[^a-zA-Z])');
-            //             var count = 0;
-            //             for (var i = 0; i < markers.length; i++) {
-            //                 var marker = markers[i];
-            //                 var text = marker.text.replace(/[^\u0000-\u007E]/g, function(c){
-            //                    return diacriticsMap[c] || c;
-            //                 });
-            //                 if (regex.test(text.toLowerCase())) {
-            //                     // console.log(keyword+' '+regex.test(text.toLowerCase())+' '+text);
-            //                     markerCluster.addMarker(marker, true);
-            //                     oms.addMarker(marker);
-            //                     count += 1;
-            //                 }
-            //             }
-            //             console.log(count);
-            //             markerCluster.redraw();
-            //         }
-            //     }
-            // });
+            $('.trigger.marker input').change(function() {
+                if ($('.trigger.marker input').is(':checked')) {
+                    markerCluster.addMarkers(markers, false);
+                    for (var i = 0; i < markers.length; i++) {
+                        oms.addMarker(marker);
+                    }
+                } else {
+                    markerCluster.clearMarkers();
+                    oms.clearMarkers();
+                }
+            });
 
             var show_realtime = true;
             $('.trigger.new-tweets input').change(function() {
