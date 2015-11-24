@@ -46,7 +46,7 @@ var server = http.createServer(function (request, response) {
     });
   } else if (request.url === '/sample') {
     response.writeHead(200, {'Content-Type': 'text/html'});
-    connection.query('select * from streamdata order by timestamp_ms desc limit 100', function (err, result) {
+    connection.query('select * from streamdata order by timestamp_ms asc limit 100', function (err, result) {
       if (err) {
         response.write('select:'+err);
       } else {
