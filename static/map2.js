@@ -11,6 +11,7 @@ google.maps.event.addDomListener(window, 'load', function() {
         success: function(result) {
             // console.log(result);
             var tweets = result.tweets;
+            console.log(result);
             var points = [];
             var markers = [];
             var iw = new google.maps.InfoWindow();
