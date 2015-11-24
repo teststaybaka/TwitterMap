@@ -27,12 +27,34 @@ google.maps.event.addDomListener(window, 'load', function() {
                 });
                 marker.desc = render_content(tweets[i]);
                 marker.text = tweets[i].text;
+                marker.score = tweets[i].score;
 
                 markers.push(marker);
                 oms.addMarker(marker);
             }
 
             var markerCluster = new MarkerClusterer(map, markers, {ignoreHidden: true, gridSize: 50, maxZoom: 15});
+            markerCluster.setCalculator(function(markers, numStyles) {
+                var index = 0;
+                var count = markers.length;
+                var dv = count;
+                while (dv !== 0) {
+                    dv = parseInt(dv / 10, 10);
+                    index++;
+                }
+
+                var accumulator = 0;
+                for (var i = 0; i < markers.length; i++) {
+                    accumulator += markers[i].score;
+                }
+
+                index = Math.min(index, numStyles);
+                return {
+                    text: count+'\n'+Math.round(accumulator*1000)/1000,
+                    index: index
+                };
+            });
+
             var heatmap = new google.maps.visualization.HeatmapLayer({
                 data: points,
                 map: map,
@@ -47,8 +69,8 @@ google.maps.event.addDomListener(window, 'load', function() {
                         oms.addMarker(marker);
                     }
                 } else {
-                    markerCluster.clearMarkers();
                     oms.clearMarkers();
+                    markerCluster.clearMarkers();
                 }
             });
 
@@ -74,6 +96,7 @@ google.maps.event.addDomListener(window, 'load', function() {
                 });
                 marker.desc = render_content(tweet);
                 marker.text = tweet.text;
+                marker.score = tweet.score;
 
                 markers.push(marker);
                 console.log(event.data);
