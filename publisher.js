@@ -32,13 +32,18 @@ connection.connect(function(err) {
 // screen_name varchar(25),\
 // image_url varchar(255),\
 // location varchar(255),\
+// score double\
 // )engine=InnoDB DEFAULT CHARSET=utf8'
 
-// alter_table= 'ALTER TABLE streamdata ADD image_url varchar(255) AFTER screen_name';
+alter_table= 'ALTER TABLE streamdata ADD score double AFTER location';
 
-// connection.query(alter_table, function(err, result) {
-//   console.log('alter table: '+err+' '+result);
-// })
+connection.query(alter_table, function(err, result) {
+  console.log('alter table: '+err+' '+result);
+});
+
+connection.query('delete from streamdata', function(err, result) {
+  console.log('delete rows: '+err+' '+result);
+});
 
 //================================================================================================================================================================================
 // workers
@@ -110,5 +115,4 @@ sqs.createQueue({
 
 module.exports = {
     connection: connection,
-    AWS: AWS,
 }

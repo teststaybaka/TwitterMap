@@ -42,6 +42,7 @@ google.maps.event.addDomListener(window, 'load', function() {
                 data: points,
                 map: map,
                 opacity: 1,
+                radius: 20,
             });
 
             $('.trigger.marker input, .keywords-select').change(function() {

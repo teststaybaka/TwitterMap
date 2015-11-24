@@ -35,7 +35,7 @@ var server = http.createServer(function (request, response) {
     });
   } else if (request.url === '/tweets') {
     response.writeHead(200, {'Content-Type': 'application/json'});
-    connection.query('select text, longitude, latitude, lang, created_at, screen_name, image_url from streamdata', function (err, result) {
+    connection.query('select text, longitude, latitude, lang, created_at, screen_name, image_url from streamdata where score is not null', function (err, result) {
       if (err) {
         response.write(JSON.stringify({error: err}));
       } else {
@@ -88,12 +88,19 @@ var server = http.createServer(function (request, response) {
           response.writeHead(403, {'Content-Type': 'text/html'});
           // response.write(JSON.stringify({error: err}));
         } else {
+          var tweet = result[0];
+          tweet.score = message.score;
+          broadcast_new_tweet(tweet);
           response.writeHead(200, {'Content-Type': 'text/html'});
-          broadcast_new_tweet(result)
           // response.write(JSON.stringify({tweets: result, histogram: histogram}));
         }
         response.end('done');
       });
+
+      connection.query('update streamdata set score='+message.score+' where id='+message.tweet_id, function(err, result) {
+        if (err) console.log(err);
+        else console.log(data);
+      })
     });
   } else if (static_path.test(request.url)) {
     fs.readFile('.'+request.url, function (err, data) {
