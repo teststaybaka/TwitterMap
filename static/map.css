@@ -155,3 +155,25 @@ span.screen-name {
     display: inline-block;
     vertical-align: middle;
 }
+
+.sentiment.positive {
+    color: rgb(200,50,50);
+}
+
+.sentiment.negative {
+    color: rgb(50,200,50);
+}
+
+.indicator {
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.sentiment.positive .indicator {
+    background-image: url("/static/up-arrow.png");
+}
+
+.sentiment.negative .indicator {
+    background-image: url("/static/down-arrow.png");
+}

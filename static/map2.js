@@ -96,10 +96,10 @@ google.maps.event.addDomListener(window, 'load', function() {
                 marker.score = tweet.score;
 
                 markers.push(marker);
+                markerCluster.addMarker(marker, false);
+                oms.addMarker(marker);
                 console.log(event.data);
                 if (show_realtime) {
-                    markerCluster.addMarker(marker, false);
-                    oms.addMarker(marker);
                     iw.setContent(marker.desc);
                     iw.setPosition(point);
                     iw.open(map);
@@ -131,7 +131,18 @@ function render_content(tweet) {
                             <span class="screen-name">'+tweet.screen_name+':</span>\
                         </a>\
                     </div>\
-                    <div class="map-marker-content">'+tweet.text+'</div>\
+                    <div class="map-marker-content">\
+                        <span>'+tweet.text+'</span>\
+                        <span class="sentiment '
+                        if (tweet.score > 0) {
+                            div += "positive"
+                        } else {
+                            div += "negative"
+                        }
+                        '">\
+                            <span class="indicator"></span><span>'+Math.round(tweet.score*1000)/1000+'</span>\
+                        </span>
+                    </div>\
                     <div class="map-marker-time">'+tweet.created_at+'</div>\
                 </div>';
     return div;
