@@ -139,7 +139,7 @@ function render_content(tweet) {
                         } else {
                             div += "negative"
                         }
-                        '">\
+                        div += '">\
                             <span class="indicator"></span><span>'+Math.round(tweet.score*1000)/1000+'</span>\
                         </span>
                     </div>\
