@@ -47,6 +47,7 @@ google.maps.event.addDomListener(window, 'load', function() {
                 for (var i = 0; i < markers.length; i++) {
                     accumulator += markers[i].score;
                 }
+                accumulator /= markers.length;
 
                 index = Math.min(index, numStyles);
                 return {
@@ -65,13 +66,8 @@ google.maps.event.addDomListener(window, 'load', function() {
             $('.trigger.marker input').change(function() {
                 if ($('.trigger.marker input').is(':checked')) {
                     markerCluster.addMarkers(markers, false);
-                    // for (var i = 0; i < markers.length; i++) {
-                    //     oms.addMarker(marker);
-                    // }
                 } else {
-                    // oms.clearMarkers();
                     markerCluster.clearMarkers();
-                    // oms.removeListener('click');
                 }
             });
 
