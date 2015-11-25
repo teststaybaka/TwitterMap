@@ -140,7 +140,11 @@ function render_content(tweet) {
                             div += "negative"
                         }
                         div += '">\
-                            <span class="indicator"></span><span>'+Math.round(tweet.score*1000)/1000+'</span>\
+                            <span class="indicator"></span><span>'
+                            if (tweet.score > 0) {
+                                div += '+'
+                            }
+                            div += Math.round(tweet.score*1000)/1000+'</span>\
                         </span>\
                     </div>\
                     <div class="map-marker-time">'+tweet.created_at+'</div>\
