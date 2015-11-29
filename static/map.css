@@ -158,11 +158,11 @@ span.screen-name {
 }
 
 .sentiment.positive {
-    color: rgb(200,50,50);
+    color: rgb(50,200,50);
 }
 
 .sentiment.negative {
-    color: rgb(50,200,50);
+    color: rgb(200,50,50);
 }
 
 .indicator {
