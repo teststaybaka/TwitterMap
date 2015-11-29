@@ -65,11 +65,11 @@ google.maps.event.addDomListener(window, 'load', function() {
 
                 var index;
                 if (accumulator > 0) {
-                    index = 0;
-                } else {
                     index = 1;
+                } else {
+                    index = 2;
                 }
-                console.log(index);
+                // console.log(index);
                 return {
                     text: Math.round(accumulator*1000)/1000,
                     index: index
