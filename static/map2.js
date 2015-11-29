@@ -63,11 +63,13 @@ google.maps.event.addDomListener(window, 'load', function() {
                 }
                 accumulator /= markers.length;
 
+                var index;
                 if (accumulator > 0) {
-                    var index = 0;
+                    index = 0;
                 } else {
-                    var index = 1;
+                    index = 1;
                 }
+                console.log(index);
                 return {
                     text: Math.round(accumulator*1000)/1000,
                     index: index
