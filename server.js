@@ -146,7 +146,7 @@ wss.on('error', function (evt) {
 
 function broadcast_new_tweet(tweet) {
   tweet = JSON.stringify(tweet);
-  console.log('Braodcasting:'+tweet);
+  console.log('Broadcasting:'+tweet);
   wss.clients.forEach(function (client) {
     client.send(tweet);
   });

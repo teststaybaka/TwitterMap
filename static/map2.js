@@ -36,13 +36,13 @@ google.maps.event.addDomListener(window, 'load', function() {
             var clusterStyles = [
                 {
                     textColor: 'black',
-                    url: '/static/smile.png',
+                    url: 'http://twittermap-xyx.elasticbeanstalk.com/static/smile.png',
                     height: 50,
                     width: 50
                 },
                 {
                     textColor: 'black',
-                    url: '/static/sad.png',
+                    url: 'http://twittermap-xyx.elasticbeanstalk.com/static/sad.png',
                     height: 50,
                     width: 50
                 }
