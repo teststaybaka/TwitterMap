@@ -33,15 +33,29 @@ google.maps.event.addDomListener(window, 'load', function() {
                 oms.addMarker(marker);
             }
 
-            var markerCluster = new MarkerClusterer(map, markers, {ignoreHidden: true, gridSize: 50, maxZoom: 15});
-            markerCluster.setCalculator(function(markers, numStyles) {
-                var index = 0;
-                var count = markers.length;
-                var dv = count;
-                while (dv !== 0) {
-                    dv = parseInt(dv / 10, 10);
-                    index++;
+            var clusterStyles = [
+                {
+                    textColor: 'black',
+                    url: '/static/smile.png',
+                    height: 50,
+                    width: 50
+                },
+                {
+                    textColor: 'black',
+                    url: '/static/sad.png',
+                    height: 50,
+                    width: 50
                 }
+            ];
+            var markerCluster = new MarkerClusterer(map, markers, {ignoreHidden: true, gridSize: 50, maxZoom: 15, styles: clusterStyles});
+            markerCluster.setCalculator(function(markers, numStyles) {
+                // var index = 0;
+                // var count = markers.length;
+                // var dv = count;
+                // while (dv !== 0) {
+                //     dv = parseInt(dv / 10, 10);
+                //     index++;
+                // }
 
                 var accumulator = 0;
                 for (var i = 0; i < markers.length; i++) {
@@ -49,7 +63,11 @@ google.maps.event.addDomListener(window, 'load', function() {
                 }
                 accumulator /= markers.length;
 
-                index = Math.min(index, numStyles);
+                if (accumulator > 0) {
+                    var index = 0;
+                } else {
+                    var index = 1;
+                }
                 return {
                     text: Math.round(accumulator*1000)/1000,
                     index: index
