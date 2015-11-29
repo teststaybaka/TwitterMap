@@ -108,6 +108,9 @@ google.maps.event.addDomListener(window, 'load', function() {
             ws.onerror = function(evt) {
                 console.log('websocket error:'+evt)
             }
+            ws.onclose = function(evt) {
+                console.log('WebSocket closed');
+            }
 
             $('.loading').addClass('hidden');
             $('.histogram-bar').each(function() {

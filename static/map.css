@@ -21,7 +21,7 @@ body {
 
 .side-bar {
     min-width: 150px;
-    width: 15vw;
+    width: 135px;
     /*height: 100vh;*/
     display: inline-block;
     vertical-align: top;
@@ -91,7 +91,7 @@ input[type=checkbox] {
     height: 100%;
     top: 0;
     bottom: 0;
-    background-color: white;
+    /*background-color: white;*/
     background-position: 50% 50%;
     background-image: url("/static/ajax-loader.gif");
     background-repeat: no-repeat;
