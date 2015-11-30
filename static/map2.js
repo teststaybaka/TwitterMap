@@ -65,9 +65,9 @@ google.maps.event.addDomListener(window, 'load', function() {
 
                 var index;
                 if (accumulator > 0) {
-                    index = 0;
-                } else {
                     index = 1;
+                } else {
+                    index = 2;
                 }
                 // console.log(index);
                 return {
