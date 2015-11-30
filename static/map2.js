@@ -36,15 +36,15 @@ google.maps.event.addDomListener(window, 'load', function() {
             var clusterStyles = [
                 {
                     textColor: 'black',
-                    url: 'http://twittermap-xyx.elasticbeanstalk.com/static/smile.png',
-                    height: 50,
-                    width: 50
+                    url: '/static/smile.png',
+                    height: 40,
+                    width: 40
                 },
                 {
                     textColor: 'black',
-                    url: 'http://twittermap-xyx.elasticbeanstalk.com/static/sad.png',
-                    height: 50,
-                    width: 50
+                    url: '/static/sad.png',
+                    height: 40,
+                    width: 40
                 }
             ];
             var markerCluster = new MarkerClusterer(map, markers, {ignoreHidden: true, gridSize: 50, maxZoom: 15, styles: clusterStyles});
