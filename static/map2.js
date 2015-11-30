@@ -47,7 +47,7 @@ google.maps.event.addDomListener(window, 'load', function() {
                     width: 50
                 }
             ];
-            var markerCluster = new MarkerClusterer(map, markers, {ignoreHidden: true, gridSize: 50, maxZoom: 15});
+            var markerCluster = new MarkerClusterer(map, markers, {ignoreHidden: true, gridSize: 50, maxZoom: 15, styles: clusterStyles});
             markerCluster.setCalculator(function(markers, numStyles) {
                 // var index = 0;
                 // var count = markers.length;
